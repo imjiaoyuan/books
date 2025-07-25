@@ -1,0 +1,77 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Bookshelf</title>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                background-color: #f8f9fa;
+                margin: 0;
+                padding: 1em;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            h1 {
+                text-align: center;
+                font-size: 2.2em;
+                margin-bottom: 1.5em;
+                color: #2c3e50;
+                font-weight: 400;
+            }
+            .book-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1.5em;
+                list-style-type: none;
+                padding: 0;
+            }
+            .book a {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                min-height: 200px;
+                padding: 1em;
+                background-color: #ffffff;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+                text-decoration: none;
+                color: #343a40;
+                text-align: center;
+                font-weight: 600;
+                font-size: 0.95em;
+                transition: all 0.2s ease-in-out;
+                box-sizing: border-box;
+                overflow: hidden;
+            }
+            .book a:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+                border-color: #007bff;
+            }
+            .book a span {
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 4;
+                line-clamp: 4;
+                overflow: hidden;
+                word-break: break-word;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>My Bookshelf</h1>
+            <ul class="book-list">
+                <li class="book"><a href="FengBaoQianXian/index.html"><span>风暴前线：二战中的拉丁美洲</span></a></li><li class="book"><a href="MingChaoNaXieShiEr/index.html"><span>明朝那些事儿（图文增补版）</span></a></li><li class="book"><a href="SanTi/index.html"><span>三体三部曲</span></a></li><li class="book"><a href="ShiDiFuQiaoBuSiZhuan/index.html"><span>史蒂夫•乔布斯传(Steve Jobs:A Biography)</span></a></li><li class="book"><a href="ShiZongZui/index.html"><span>十宗罪</span></a></li><li class="book"><a href="WanLiShiWuNian/index.html"><span>万历十五年</span></a></li><li class="book"><a href="WuDongQianKun/index.html"><span>武动乾坤</span></a></li><li class="book"><a href="YueLiangHeLiuBianShi/index.html"><span>月亮和六便士</span></a></li>
+            </ul>
+        </div>
+    </body>
+    </html>
+    
