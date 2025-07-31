@@ -7,12 +7,9 @@ from ebooklib import epub
 from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 import warnings
 import re
+import argparse
 
 warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
-
-INPUT_DIRECTORY = '/home/jy/work/epubs'
-MAIN_OUTPUT_DIRECTORY = '/home/jy/work/books'
-EXCLUDE_FROM_CLEANUP = ['.git', '.gitignore', 'README.md', 'README']
 
 def natural_sort_key(filename):
     return [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', filename)]
@@ -353,14 +350,22 @@ def convert_ebook_to_html(epub_path, output_dir):
     return book_title
 
 if __name__ == '__main__':
-    if not os.path.isdir(INPUT_DIRECTORY):
-        print(f"Error: Input directory not found: {INPUT_DIRECTORY}")
-        exit()
+    parser = argparse.ArgumentParser(description="Convert a directory of .epub files to a browsable HTML bookshelf.")
+    parser.add_argument('-i', '--input', required=True, help='Input directory containing .epub files.')
+    parser.add_argument('-o', '--output', required=True, help='Main output directory for the HTML bookshelf.')
+    args = parser.parse_args()
 
-    if os.path.isdir(MAIN_OUTPUT_DIRECTORY):
-        for item_name in os.listdir(MAIN_OUTPUT_DIRECTORY):
-            if item_name not in EXCLUDE_FROM_CLEANUP:
-                item_path = os.path.join(MAIN_OUTPUT_DIRECTORY, item_name)
+    input_directory = args.input
+    main_output_directory = args.output
+
+    if not os.path.isdir(input_directory):
+        print(f"Error: Input directory not found: {input_directory}")
+        exit(1)
+
+    if os.path.isdir(main_output_directory):
+        for item_name in os.listdir(main_output_directory):
+            if item_name not in ['.git', '.gitignore', 'README.md', 'LICENSE', 'index.html', 'epub_to_html.py']:
+                item_path = os.path.join(main_output_directory, item_name)
                 try:
                     if os.path.isdir(item_path):
                         shutil.rmtree(item_path)
@@ -369,12 +374,12 @@ if __name__ == '__main__':
                 except OSError as e:
                     print(f"Warning: Could not remove {item_path}. Reason: {e}")
     else:
-        os.makedirs(MAIN_OUTPUT_DIRECTORY, exist_ok=True)
+        os.makedirs(main_output_directory, exist_ok=True)
         
-    ebook_files = sorted(glob.glob(os.path.join(INPUT_DIRECTORY, '*.epub')))
+    ebook_files = sorted(glob.glob(os.path.join(input_directory, '*.epub')))
 
     if not ebook_files:
-        print(f"No .epub files found in '{INPUT_DIRECTORY}'.")
+        print(f"No .epub files found in '{input_directory}'.")
         exit()
 
     converted_books = []
@@ -383,7 +388,7 @@ if __name__ == '__main__':
         print(f"Processing [{i+1}/{len(ebook_files)}]: {book_name}")
         
         output_book_dir_name = os.path.splitext(book_name)[0]
-        final_output_path = os.path.join(MAIN_OUTPUT_DIRECTORY, output_book_dir_name)
+        final_output_path = os.path.join(main_output_directory, output_book_dir_name)
         
         try:
             book_title = convert_ebook_to_html(ebook_file_path, final_output_path)
@@ -392,6 +397,6 @@ if __name__ == '__main__':
             print(f"  -> Failed to convert {book_name}: {e}")
     
     if converted_books:
-        create_master_index(MAIN_OUTPUT_DIRECTORY, converted_books)
+        create_master_index(main_output_directory, converted_books)
     
     print("Done.")
