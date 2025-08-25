@@ -137,11 +137,11 @@ def add_navigation_buttons(soup, prev_chapter, next_chapter, book_title):
 
     if prev_chapter:
         prev_link = soup.new_tag('a', href=prev_chapter)
-        prev_link.string = '← Prev'
+        prev_link.string = 'Prev'
         nav_div.append(prev_link)
     else:
         prev_disabled = soup.new_tag('span', **{'class': 'disabled'})
-        prev_disabled.string = '← Prev'
+        prev_disabled.string = 'Prev'
         nav_div.append(prev_disabled)
 
     home_link = soup.new_tag('a', href='../index.html')
@@ -154,11 +154,11 @@ def add_navigation_buttons(soup, prev_chapter, next_chapter, book_title):
 
     if next_chapter:
         next_link = soup.new_tag('a', href=next_chapter)
-        next_link.string = 'Next →'
+        next_link.string = 'Next'
         nav_div.append(next_link)
     else:
         next_disabled = soup.new_tag('span', **{'class': 'disabled'})
-        next_disabled.string = 'Next →'
+        next_disabled.string = 'Next'
         nav_div.append(next_disabled)
 
     soup.body.append(nav_div)
