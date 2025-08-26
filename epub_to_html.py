@@ -107,13 +107,20 @@ def add_navigation_buttons(soup, prev_chapter, next_chapter, book_title):
         margin-top: 3em;
         padding-top: 1.5em;
         border-top: 1px solid #aaaaaa;
-        text-align: center;
         font-size: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .chapter-navigation a,
+    .chapter-navigation .disabled {
+        margin: 0 0.7em;
+        white-space: nowrap;
     }
     .chapter-navigation a {
         color: #0056b3;
         text-decoration: underline;
-        margin: 0 1em;
     }
     .chapter-navigation a:hover {
         color: #003d7c;
@@ -121,7 +128,6 @@ def add_navigation_buttons(soup, prev_chapter, next_chapter, book_title):
     .chapter-navigation .disabled {
         color: #999999;
         text-decoration: none;
-        margin: 0 1em;
         cursor: not-allowed;
     }
     """
@@ -221,7 +227,7 @@ def convert_ebook_to_html(epub_path, output_dir):
 
                 style_string = """
                 html {
-                    overflow-x: hidden; 
+                    overflow-x: hidden;
                 }
                 body {
                     font-family: serif;

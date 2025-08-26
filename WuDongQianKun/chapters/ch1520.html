@@ -2,7 +2,7 @@
 <html epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
 <head><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>第一千八十八章</title><style>
                 html {
-                    overflow-x: hidden; 
+                    overflow-x: hidden;
                 }
                 body {
                     font-family: serif;
@@ -30,13 +30,20 @@
         margin-top: 3em;
         padding-top: 1.5em;
         border-top: 1px solid #aaaaaa;
-        text-align: center;
         font-size: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .chapter-navigation a,
+    .chapter-navigation .disabled {
+        margin: 0 0.7em;
+        white-space: nowrap;
     }
     .chapter-navigation a {
         color: #0056b3;
         text-decoration: underline;
-        margin: 0 1em;
     }
     .chapter-navigation a:hover {
         color: #003d7c;
@@ -44,7 +51,6 @@
     .chapter-navigation .disabled {
         color: #999999;
         text-decoration: none;
-        margin: 0 1em;
         cursor: not-allowed;
     }
     </style></head>
