@@ -220,6 +220,9 @@ def convert_ebook_to_html(epub_path, output_dir):
                     soup.head.insert(0, meta_viewport)
 
                 style_string = """
+                html {
+                    overflow-x: hidden; 
+                }
                 body {
                     font-family: serif;
                     max-width: 800px;
@@ -236,6 +239,7 @@ def convert_ebook_to_html(epub_path, output_dir):
                     margin-top: 0;
                     margin-bottom: 1em;
                     padding: 0;
+                    word-wrap: break-word;
                 }
                 p {
                     text-indent: 2em;
