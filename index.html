@@ -1,0 +1,42 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Bookshelf</title>
+        <style>
+            :root {
+                --bg-color: #f8f9fa; --text-color: #343a40; --header-color: #2c3e50;
+                --card-bg: #ffffff; --card-border: #dee2e6; --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+                --card-hover-shadow: 0 8px 12px rgba(0, 0, 0, 0.1); --link-hover-border: #007bff;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --bg-color: #121212; --text-color: #e0e0e0; --header-color: #f1f1f1;
+                    --card-bg: #1e1e1e; --card-border: #444444; --card-shadow: none;
+                    --card-hover-shadow: none; --link-hover-border: #58a6ff;
+                }
+            }
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 1em;
+            }
+            .container { max-width: 1200px; margin: 0 auto; }
+            h1 { text-align: center; font-size: 2.2em; margin-bottom: 1.5em; color: var(--header-color); font-weight: 400; }
+            .book-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.5em; list-style-type: none; padding: 0; }
+            .book a {
+                display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 200px;
+                padding: 1em; background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px;
+                box-shadow: var(--card-shadow); text-decoration: none; color: var(--text-color); text-align: center;
+                font-weight: 600; font-size: 0.95em; transition: all 0.2s ease-in-out; box-sizing: border-box; overflow: hidden;
+            }
+            .book a:hover { transform: translateY(-5px); box-shadow: var(--card-hover-shadow); border-color: var(--link-hover-border); }
+            .book a span { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; line-clamp: 4; overflow: hidden; word-break: break-word; }
+        </style>
+    </head>
+    <body>
+        <div class="container"><h1>My Bookshelf</h1><ul class="book-list"><li class="book"><a href="DaMingXingShuaiSanBaiNian/index.html"><span>大明兴衰三百年【一本书读懂中国人的生存智慧和博弈法则，重现明代政治的运作机制与社会生活细节，了解其因何而兴，因何而亡。】</span></a></li><li class="book"><a href="FengBaoQianXian/index.html"><span>风暴前线：二战中的拉丁美洲</span></a></li><li class="book"><a href="HuangJinShiDai/index.html"><span>王小波：黄金时代（李银河独家授权，并亲自校订全稿。王小波的经典之作，逝世二十周年精装纪念版！李银河亲自作序纪念！）</span></a></li><li class="book"><a href="JiJingDeChunTian/index.html"><span>寂静的春天(四师推荐精装版)【麦家、苏童、阿来、马家辉，四位知名作家指定推荐版本，茅盾文学奖得主、作家阿来作序深度解读！】</span></a></li><li class="book"><a href="LaoRenYuHai/index.html"><span>老人与海 (名著译林)</span></a></li><li class="book"><a href="LiaoBuQiDeGaiCiBi/index.html"><span>作家榜经典：了不起的盖茨比(村上春树的至爱杰作！诺奖译者董继平译，全新未删节插图珍藏版) (大星文化出品)</span></a></li><li class="book"><a href="MingChaoNaXieShiEr/index.html"><span>明朝那些事儿（图文增补版）</span></a></li><li class="book"><a href="MuSiLinDeZangLi/index.html"><span>穆斯林的葬礼</span></a></li><li class="book"><a href="NiYiShengDeGuShi/index.html"><span>你一生的故事</span></a></li><li class="book"><a href="PuJing_QuanLiDeLuoJi/index.html"><span>普京：权力的逻辑(普京亲临俄文版首发式！作者随行普京多年，呈现真正的普京！) (传记译林)</span></a></li><li class="book"><a href="SanTi/index.html"><span>三体三部曲</span></a></li><li class="book"><a href="ShenCongWenJingXuanSanWen/index.html"><span>沈从文精选散文系列：全6册（八十六载，生命起伏，一代文学大师的生活轨迹）</span></a></li><li class="book"><a href="ShiDiFuQiaoBuSiZhuan/index.html"><span>史蒂夫•乔布斯传(Steve Jobs:A Biography)</span></a></li><li class="book"><a href="ShiTieShengZuoPinQuanBian/index.html"><span>史铁生作品全编（收录史铁生所创作的几乎全部作品；纪念史铁生逝世十周年）</span></a></li><li class="book"><a href="ShiZongZui/index.html"><span>十宗罪</span></a></li><li class="book"><a href="ShuangChengJi/index.html"><span>双城记</span></a></li><li class="book"><a href="SiShiTongTang/index.html"><span>读客经典文库：四世同堂（翻开完整版《四世同堂》，这些熬过艰苦岁月的不屈灵魂，一定会给你力量！自英文版The Yellow Storm中补译遗失的后13章）</span></a></li><li class="book"><a href="SuShiZhe/index.html"><span>素食者【布克国际文学奖获奖作品！击败帕慕克、阎连科、费兰特等154位名家赢得桂冠。借阅率超过《82年的金智英》、与《三体》并列十年十佳。为了逃避来自丈夫、家庭和社会的暴力，她决定变成一棵树！】</span></a></li><li class="book"><a href="WanLiShiWuNian/index.html"><span>万历十五年</span></a></li><li class="book"><a href="WoDeQianBanSheng/index.html"><span>我的前半生：全本(九项奥斯卡金像奖电影《末代皇帝》原著，末代皇帝溥仪亲笔撰写，全面、真实反映溥仪的一生和他所经历的时代 )</span></a></li><li class="book"><a href="WuDongQianKun/index.html"><span>武动乾坤</span></a></li><li class="book"><a href="XiaoShiDe13JiTaiJie/index.html"><span>消失的13级台阶（荣获日本推理小说至高荣誉江户川乱步奖！是否值得为一场痛快的复仇，陪葬掉自己的人生？）</span></a></li><li class="book"><a href="YeXingJi/index.html"><span>王小波：夜行记（李银河独家授权，并亲自校订全稿。收录五篇唐人故事，调侃、幽默和机智，堪比《故事新编》，王小波精髓之作。）</span></a></li><li class="book"><a href="YueLiangHeLiuBianShi/index.html"><span>月亮和六便士</span></a></li><li class="book"><a href="ZiYouYuHuiMie/index.html"><span>自由与毁灭：法国大革命，1789-1799(一部里程碑式的历史著作，以21世纪的全球视野，再现法国大革命的全景历程)</span></a></li></ul></div>
+    </body>
+    </html>
+    
