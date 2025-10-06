@@ -1,59 +1,29 @@
 <!--?xml version='1.0' encoding='utf-8'?--><!DOCTYPE html>
 <html epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
 <head><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>第三章 踏上征途</title><style>
-                html {
-                    overflow-x: hidden;
+            :root {
+                --body-bg: #C7EDCC; --text-color: #2E4033; --link-color: #005a5a;
+                --nav-border: #a5c5a9; --link-hover: #004848; --disabled-color: #7b8b7d;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root { 
+                    --body-bg: #6E7B6C; --text-color: #d1d1d1; --link-color: #a8d7a8;
+                    --nav-border: #535d52; --link-hover: #c3e3c3; --disabled-color: #929a91;
                 }
-                body {
-                    font-family: serif;
-                    max-width: 800px;
-                    margin: 1em auto;
-                    padding: 0 1em;
-                    line-height: 1.8;
-                    font-size: 1.1em;
-                    background-color: #cce8cf;
-                    color: #333333;
-                }
-                a { color: #0056b3; text-decoration: none; }
-                a:hover { text-decoration: underline; }
-                p, div, h1, h2, h3, h4, h5, h6 {
-                    margin-top: 0;
-                    margin-bottom: 1em;
-                    padding: 0;
-                    word-wrap: break-word;
-                }
-                p {
-                    text-indent: 2em;
-                }
-                
-    .chapter-navigation {
-        margin-top: 3em;
-        padding-top: 1.5em;
-        border-top: 1px solid #aaaaaa;
-        font-size: 1em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    .chapter-navigation a,
-    .chapter-navigation .disabled {
-        margin: 0 0.7em;
-        white-space: nowrap;
-    }
-    .chapter-navigation a {
-        color: #0056b3;
-        text-decoration: underline;
-    }
-    .chapter-navigation a:hover {
-        color: #003d7c;
-    }
-    .chapter-navigation .disabled {
-        color: #999999;
-        text-decoration: none;
-        cursor: not-allowed;
-    }
-    </style></head>
+            }
+            html { overflow-x: hidden; }
+            body { font-family: serif; max-width: 800px; margin: 1em auto; padding: 0 1em;
+                   line-height: 1.8; font-size: 1.1em; background-color: var(--body-bg); color: var(--text-color); }
+            a { color: var(--link-color); text-decoration: none; } a:hover { text-decoration: underline; }
+            p, div, h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 1em; padding: 0; word-wrap: break-word; }
+            p { text-indent: 2em; }
+            .chapter-navigation { margin-top: 3em; padding-top: 1.5em; border-top: 1px solid var(--nav-border);
+                                  font-size: 1em; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
+            .chapter-navigation a, .chapter-navigation .disabled { margin: 0 0.7em; white-space: nowrap; }
+            .chapter-navigation a { color: var(--link-color); text-decoration: underline; }
+            .chapter-navigation a:hover { color: var(--link-hover); }
+            .chapter-navigation .disabled { color: var(--disabled-color); text-decoration: none; cursor: not-allowed; }
+            </style></head>
 <body><h3><span class="border">第三章</span><br/>　　踏上征途</h3>
 <blockquote>
 <p class="noindent">○　<span class="underline">他的师兄告诉他　有人已经知道了他看义军信件的事情　准备去告发他</span></p>
@@ -70,7 +40,7 @@
 <p>可怜的脱脱，一个好的理论家，却不是一个实践家。</p>
 <p>老把戏出场了，当民工们挖到山东时，他们从河道下挖出了一个一只眼睛的石人，背部刻着：石人一只眼，挑动黄河天下反。民工们突然发现，这正是他们在工地上传唱了几年的歌词。于是人心思动。</p>
 <p class="p_title noindent center ht">压垮元朝的最后一根稻草</p>
-
+<p class="picture"></p>
 <p>这真是老把戏，简直可以编成电脑程序，在起义之前总要搞点这种封建迷信，但也没办法，人家就吃这一套。</p>
 <p>接着的事情似乎就是理所应当的了。几天后，在朱重八讨过饭的地方（颍州，今安徽阜阳），韩山童和刘福通起义了。他们的起义与以往起义并没有不同，照例要搞个宗教组织，这次是白莲教。当然既然敢起义，身份也应该有所不同，于是，可能是八辈子贫农的韩山童突然姓了赵，成了宋朝的皇室，刘福通也成了刘光世大将的后人。</p>
 <p>他们的命运和以往每一次起义的农民领袖也类似，起义、被镇压、后来者居上，这似乎是陈胜吴广们的宿命。</p>
@@ -84,14 +54,14 @@
 <p>在元代这个把人分为四个等级的朝代里，最高等级的蒙古人杀掉最低等级的南人，唯一的惩罚是赔偿一头驴，碰到个闲散民工之类的人，可能连驴都省了。蒙古贵族们的思维似乎很奇怪，他们即使在占据了中国后，好像仍然把自己当成客人，主人家的东西想抢就抢、想拿就拿，反正不关自己的事。在他们的思维中，这些南人只会忍受也只能忍受他们的折磨。</p>
 <p>但他们错了，这些奴隶会起来反抗的。当愤怒和不满超过了限度，当连像狗一样生存下去都成为一种奢望的时候，反抗是唯一的道路。反抗是为了生存。</p>
 <p class="p_title noindent center ht">元统治下的四个等级</p>
-
+<p class="picture"></p>
 <p class="p_sm kt">★ 法律规定，蒙古人、色目人殴打汉人、南人，后者不得还击、报复</p>
 <p class="p_title noindent center ht">元末农民起义主要人物关系总图</p>
-
+<p class="picture"></p>
 <p class="p_title noindent center ht">元末农民起义主要人物关系分图㈠</p>
-
+<p class="picture"></p>
 <p class="p_title noindent center ht">元末农民起义主要人物关系分图㈡</p>
-
+<p class="picture"></p>
 <p>这把火终于烧起来了，而且是燎原之势。</p>
 <p>在短短的一年时间里，看似强大的元帝国发生了几十起暴动，数百万人参加了起义军，即使那纵横天下无敌手的蒙古骑兵也不复当年之勇，无力拯救危局。元帝国就像一堵朽墙，只要再踢一脚，就会倒下来。</p>
 <p>此时的朱重八却仍然在寺庙里撞着钟，从种种迹象看，他并没有参加起义军的企图。虽然他与元朝有着不共戴天的仇恨，但对于一个普通人朱重八来说，起义是要冒风险的，捉住后是要杀头的，这使得他不得不仔细地考虑。</p>

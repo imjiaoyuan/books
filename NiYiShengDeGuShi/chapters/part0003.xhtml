@@ -1,59 +1,29 @@
 <!--?xml version='1.0' encoding='utf-8'?--><!DOCTYPE html>
 <html epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
 <head><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>你一生的故事</title><style>
-                html {
-                    overflow-x: hidden;
+            :root {
+                --body-bg: #C7EDCC; --text-color: #2E4033; --link-color: #005a5a;
+                --nav-border: #a5c5a9; --link-hover: #004848; --disabled-color: #7b8b7d;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root { 
+                    --body-bg: #6E7B6C; --text-color: #d1d1d1; --link-color: #a8d7a8;
+                    --nav-border: #535d52; --link-hover: #c3e3c3; --disabled-color: #929a91;
                 }
-                body {
-                    font-family: serif;
-                    max-width: 800px;
-                    margin: 1em auto;
-                    padding: 0 1em;
-                    line-height: 1.8;
-                    font-size: 1.1em;
-                    background-color: #cce8cf;
-                    color: #333333;
-                }
-                a { color: #0056b3; text-decoration: none; }
-                a:hover { text-decoration: underline; }
-                p, div, h1, h2, h3, h4, h5, h6 {
-                    margin-top: 0;
-                    margin-bottom: 1em;
-                    padding: 0;
-                    word-wrap: break-word;
-                }
-                p {
-                    text-indent: 2em;
-                }
-                
-    .chapter-navigation {
-        margin-top: 3em;
-        padding-top: 1.5em;
-        border-top: 1px solid #aaaaaa;
-        font-size: 1em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    .chapter-navigation a,
-    .chapter-navigation .disabled {
-        margin: 0 0.7em;
-        white-space: nowrap;
-    }
-    .chapter-navigation a {
-        color: #0056b3;
-        text-decoration: underline;
-    }
-    .chapter-navigation a:hover {
-        color: #003d7c;
-    }
-    .chapter-navigation .disabled {
-        color: #999999;
-        text-decoration: none;
-        cursor: not-allowed;
-    }
-    </style></head>
+            }
+            html { overflow-x: hidden; }
+            body { font-family: serif; max-width: 800px; margin: 1em auto; padding: 0 1em;
+                   line-height: 1.8; font-size: 1.1em; background-color: var(--body-bg); color: var(--text-color); }
+            a { color: var(--link-color); text-decoration: none; } a:hover { text-decoration: underline; }
+            p, div, h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 1em; padding: 0; word-wrap: break-word; }
+            p { text-indent: 2em; }
+            .chapter-navigation { margin-top: 3em; padding-top: 1.5em; border-top: 1px solid var(--nav-border);
+                                  font-size: 1em; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
+            .chapter-navigation a, .chapter-navigation .disabled { margin: 0 0.7em; white-space: nowrap; }
+            .chapter-navigation a { color: var(--link-color); text-decoration: underline; }
+            .chapter-navigation a:hover { color: var(--link-hover); }
+            .chapter-navigation .disabled { color: var(--disabled-color); text-decoration: none; cursor: not-allowed; }
+            </style></head>
 <body><h1 class="chapter-one">你一生的故事</h1>
 <p class="bodytext">你的父亲很快便会向我提出那个问题，这将是我们夫妻生活中最重要的一刻，我希望专注地倾听，记下每一个细节。夜深人静，你父亲和我在外消磨了一个晚上，用餐、看演出，我们刚刚回来。我们俩来到院子里，天上是一轮圆月。我对你爸爸说我想跳舞，他答应了。我们跳的是一支慢舞，一对三十来岁的夫妻在溶溶月光下舞动身躯，就像两个孩子。夜色中有一丝凉意，可是我一点儿也不觉得冷。然后，你父亲说：“你想要个孩子吗？”</p>
 <p class="bodytext">那个时候，你父亲和我结婚已经两年了，住在埃利斯路。搬出那里时你还很小，不记得那所房子。但我们会给你看它的照片，告诉你发生在那所房子里的故事。以后的日子里，我会迫不及待，盼望着告诉你那个晚上的事，就是我怀上你的那个晚上。但时间还没到，最适当的时机应该是你准备好自己要个孩子的时候。但是，我们永远也不会有那个机会了。</p>
@@ -295,17 +265,17 @@
 <p class="bodytext">“几个小时前。我刚跟那边的人开过视频会议，我写给你看。”他已经动手擦起黑板来。</p>
 <p class="bodytext">“别急，物理的事我不需要听。”</p>
 <p class="bodytext">“好的。”他拈起粉笔，画了一幅线图。</p>
-
+<div class="img-center"></div>
 <p class="bodytext">“行了。一束光穿过空气进入水中，这就是光走过的路径。光线循着一条直线，直到与水接触。水的折射率与空气不同，所以光走的方向产生了改变。这些你以前学过，对吧？”</p>
 <p class="bodytext">我点点头，“当然。”</p>
 <p class="bodytext">“关于光走的路径，有个极其有意思的特点：如果要穿越两点之间的距离，光走的路径必然是耗时最少，即所需时间最短的一条。”</p>
 <p class="bodytext">“再说一遍？”</p>
 <p class="bodytext">“运用你的想象力，作个假设。假设一束光走的路径是这一条。”他在线图上添上一道虚线。</p>
-
+<div class="img-center"></div>
 <p class="bodytext">“光线走的不是这条路径，这是一条理论上的线。它比光实际走的路程还要短些。但是，你要记住，我们的这一束光穿越空气，进入水中。光在水里的速度比在空气中慢。请看这条理论线，它的距离虽然比实际线更短，但在水中的部分比实际线要长一些。所以，光线如果走这条理论线，虽然距离更短，但所费时间却比实际路线更长。”</p>
 <p class="bodytext">“嗯，我明白了。”</p>
 <p class="bodytext">“现在再想象一下，如果光走的是这另外一条线。”他在线图上画上第二道虚线。</p>
-
+<div class="img-center"></div>
 <p class="bodytext">“与实际线相比，这第二条理论线在水中的部分更少，但它的总长度比实际线长得多。光如果走这条路线，花的时间也同样比实际线长。”</p>
 <p class="bodytext">盖雷放下粉笔，用粘着白粉的手指朝线图比画了一下，“光如果走任何一条理论线，它在旅途中所费的时间都比实际线更长。换句话说，一束光实际选择的路线永远是最快的一条。这就是费尔马的最少时间律。”</p>
 <p class="bodytext">“唔，有意思。七肢桶作出反应的就是这一条定律？”</p>

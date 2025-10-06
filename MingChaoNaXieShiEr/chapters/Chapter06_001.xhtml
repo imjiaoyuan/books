@@ -1,59 +1,29 @@
 <!--?xml version='1.0' encoding='utf-8'?--><!DOCTYPE html>
 <html epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
 <head><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>第一章 奇怪的人</title><style>
-                html {
-                    overflow-x: hidden;
+            :root {
+                --body-bg: #C7EDCC; --text-color: #2E4033; --link-color: #005a5a;
+                --nav-border: #a5c5a9; --link-hover: #004848; --disabled-color: #7b8b7d;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root { 
+                    --body-bg: #6E7B6C; --text-color: #d1d1d1; --link-color: #a8d7a8;
+                    --nav-border: #535d52; --link-hover: #c3e3c3; --disabled-color: #929a91;
                 }
-                body {
-                    font-family: serif;
-                    max-width: 800px;
-                    margin: 1em auto;
-                    padding: 0 1em;
-                    line-height: 1.8;
-                    font-size: 1.1em;
-                    background-color: #cce8cf;
-                    color: #333333;
-                }
-                a { color: #0056b3; text-decoration: none; }
-                a:hover { text-decoration: underline; }
-                p, div, h1, h2, h3, h4, h5, h6 {
-                    margin-top: 0;
-                    margin-bottom: 1em;
-                    padding: 0;
-                    word-wrap: break-word;
-                }
-                p {
-                    text-indent: 2em;
-                }
-                
-    .chapter-navigation {
-        margin-top: 3em;
-        padding-top: 1.5em;
-        border-top: 1px solid #aaaaaa;
-        font-size: 1em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    .chapter-navigation a,
-    .chapter-navigation .disabled {
-        margin: 0 0.7em;
-        white-space: nowrap;
-    }
-    .chapter-navigation a {
-        color: #0056b3;
-        text-decoration: underline;
-    }
-    .chapter-navigation a:hover {
-        color: #003d7c;
-    }
-    .chapter-navigation .disabled {
-        color: #999999;
-        text-decoration: none;
-        cursor: not-allowed;
-    }
-    </style></head>
+            }
+            html { overflow-x: hidden; }
+            body { font-family: serif; max-width: 800px; margin: 1em auto; padding: 0 1em;
+                   line-height: 1.8; font-size: 1.1em; background-color: var(--body-bg); color: var(--text-color); }
+            a { color: var(--link-color); text-decoration: none; } a:hover { text-decoration: underline; }
+            p, div, h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 1em; padding: 0; word-wrap: break-word; }
+            p { text-indent: 2em; }
+            .chapter-navigation { margin-top: 3em; padding-top: 1.5em; border-top: 1px solid var(--nav-border);
+                                  font-size: 1em; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
+            .chapter-navigation a, .chapter-navigation .disabled { margin: 0 0.7em; white-space: nowrap; }
+            .chapter-navigation a { color: var(--link-color); text-decoration: underline; }
+            .chapter-navigation a:hover { color: var(--link-hover); }
+            .chapter-navigation .disabled { color: var(--disabled-color); text-decoration: none; cursor: not-allowed; }
+            </style></head>
 <body><h3><span class="border">第一章</span><br/>　　奇怪的人</h3>
 <blockquote>
 <p class="noindent">○　<span class="underline">海纳百川　有容乃大　壁立千仞　无欲则刚</span></p>
@@ -75,7 +45,7 @@
 <p>“青词宰相”这个称呼其实不独属于严嵩。由于明代无相，内阁大学士们都被看做宰相。而袁炜，这位徐阶的门生，也是“青词宰相”之一。袁炜才思敏捷，嘉靖半夜里递出一张条，要求撰写青词，他也能马上写成。但袁炜的人品颇遭人非议。一是他善于拍马逢迎，一次嘉靖养的猫死了，让大家写写祭文，袁炜以一句此猫将“化狮成龙”，成功地从众多谄媚之作中脱颖而出；二是自视清高，看到别人的文章写得稍微不好，就肆意嘲笑，除了大老板嘉靖，同僚中几乎没有一个看到他不讨厌的。</p>
 </div>
 <p class="p_title noindent center ht">徐阶 PK 严嵩</p>
-
+<p class="picture"></p>
 <p>如果考察一下明朝的历代首辅，就会发现这帮人大都不穷（说他们穷也没人信），要单靠死工资，估计早就饿死了，所以多多少少都有点经济问题，什么火耗、冰敬、炭敬，等等，千里做官只为钱，不必奇怪。</p>
 <p>但徐阶是干实事的。与严嵩不同，他刚一上任，就在自己的办公室挂上了这样一块匾：以威福还主上，以政务还诸司，以用舍刑赏还公论。而他确确实实做到了。</p>
 <p>在严嵩的时代，大部分的官职分配，都只取决于一个原则——钱，由严世蕃坐镇，什么职位收多少钱，按位取酬，诚信经营，恕不还价。徐阶废除了这一切，虽然他也任用自己的亲信，但总的来说，还是做到了人尽其用。正是在他的努力下，李春芳、张居正、殷正茂等第一流的人才得以大展拳脚。</p>
@@ -110,7 +80,7 @@
 <p><br/></p>
 <p>经过二十几年地试探，严嵩摸透了嘉靖的脾气和个性，并在某种程度上成功地影响并利用了他。</p>
 <p class="p_title noindent center ht">徐阶划时代的贡献</p>
-
+<p class="picture"></p>
 <p>而徐阶则更进一步，在打垮了严嵩之后，他成了一个足以制衡嘉靖的人。嘉靖要修房子，他说不修就不修；嘉靖儿子的地，他说分就分。这是一个不太起眼，却极为重要的转折点，它意味着一股强大势力的出现，强大到足以超越至高无上的皇权。</p>
 <p>这才是徐阶所代表的真正意义，绝非个人，而是相权，是整个文官集团的力量。</p>
 <p><br/></p>
@@ -183,9 +153,9 @@
 <p>虽然史料上没有明确记载，但根据现有资料分析，海瑞的那几位叔叔伯伯实在不怎么厚道，明明家里有人当官，海瑞却没沾过一点光，童年的生活十分困苦，以至于母亲每天都要做针线活贴补家用。</p>
 <p>很明显，在海氏家族中，海瑞家大概是很没地位的，大家都看死这对母子闹不出什么名堂。实际情况似乎也差不多，海瑞同学从小既不会做诗，也不会作文，没有一点儿神童的征兆，看情形，将来顶了天也就能混个秀才。</p>
 <p>虽说境况不太乐观，但海瑞的母亲认准了一条死理：再穷不能穷教育，再苦不能苦孩子。不管家里多穷多苦，她都保证海瑞吃好喝好，并日夜督促他用心学习。</p>
-
+<p class="picture"></p>
 <p class="p_title noindent center ht">影响海瑞性格的因素</p>
-
+<p class="picture"></p>
 <p>这就是海瑞的童年生活，每天不是学堂，就是他娘，周围的小朋友们也不找他玩，当然海瑞同学也不在乎，他的唯一志向就是好好学习，天天向上。</p>
 <p><br/></p>
 <p>很多史料都对海瑞的这段经历津津乐道，不是夸他刻苦用功，就是表扬他妈教子有方。而在我看来，这全是扯淡，一个好孩子就是这样被毁掉的。</p>
@@ -210,7 +180,7 @@
 <p>海瑞对待家人的严苛程度有时骇人听闻。有一天，他看见五岁的女儿手里抓着一块糕饼吃，于是问：“这糕饼哪里来的？”女儿回答：“是一个男仆给的。”海瑞立刻勃然大怒，大骂道：“女孩子怎么可以随便接受男人给的东西？这样还配当我的女儿吗，我要是你都没脸活下去！”可怜五岁的小女孩因此吓得不轻，饿了七天七夜就死了。当时就有人评价：“如果他的女儿真的有被逼死的道理，那么海瑞也不失为贤人。但他现在的做法，只能说是不近人情。”</p>
 </div>
 <p class="p_title noindent center ht">出身决定仕途</p>
-
+<p class="picture"></p>
 <p>首先这官要等，从几年到几十年，就看你运气如何、寿命长短，如果任职命令下来的时候，正赶上你的追悼会，那也不能说你倒霉。</p>
 <p>其次这官不好，但凡分给举人的官，大都是些清水衙门的闲差、小官，什么主簿、典史、教授（从九品，不是今天的教授）之类的，最多也就是个八九品，要能混到个七品县令，那就是祖坟起了火，记得一定回去拜拜。</p>
 <p>再次这官要挑，别以为官小就委屈了你，想要还不给你呢！你还得去吏部面试，大家排好队站成一排，让考官去挑，文章才学都不考，也没时间考，这里讲究的是以貌取人，长得帅的晋级，一般的待定，歪瓜裂枣的直接淘汰。顺便说一句，相貌考核有统一规范，国字脸最上等，宽脸第二，尖嘴猴腮者，赶回家种红薯。</p>
@@ -231,7 +201,7 @@
 <p>他规范了考勤制度，规定但凡不来，就要请假，有敢擅自缺课者，必定严惩，而且他说到做到，每天都第一个到，最后一个走，一个都不能少。</p>
 <p>这下学生们惨了，本来每天早退旷课都是家常便饭，现在突然被抓得死死的，这位局长大人脸上又总是一副你欠他钱的表情，于是不久后，海瑞先生就得到了人生中的第一个绰号——海阎王。</p>
 <p>难熬归难熬，但学生们很快也发现，这位海阎王倒有个好处——从不收礼金。</p>
-
+<p class="picture"></p>
 <p>所谓礼金，就是学生家长送给老师的东西，不一定是钱，什么鸡鸭鱼肉海鲜特产，一应俱全。说实话，这玩意儿谁也不想送，但如果不送，难保老师不会特意关照你的儿女：置之不理、罚搞清洁、罚坐后排等，那都是手到擒来。</p>
 <p>但海阎王不收，不但不收礼金，也不为难学生，他平等地对待每一个人，虽然他很严厉，却从不因个人好恶惩罚学生。所以在恐惧之余，学生们也很尊敬他。</p>
 <p>其实总体说来，这个职业是很适合海瑞的，就凭他那个脾气，哪个上级也受不了，干个小教谕，也没什么应酬，可谓是得心应手。</p>

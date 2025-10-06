@@ -1,59 +1,29 @@
 <!--?xml version='1.0' encoding='utf-8'?--><!DOCTYPE html>
 <html epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
 <head><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>第十一章 谜团</title><style>
-                html {
-                    overflow-x: hidden;
+            :root {
+                --body-bg: #C7EDCC; --text-color: #2E4033; --link-color: #005a5a;
+                --nav-border: #a5c5a9; --link-hover: #004848; --disabled-color: #7b8b7d;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root { 
+                    --body-bg: #6E7B6C; --text-color: #d1d1d1; --link-color: #a8d7a8;
+                    --nav-border: #535d52; --link-hover: #c3e3c3; --disabled-color: #929a91;
                 }
-                body {
-                    font-family: serif;
-                    max-width: 800px;
-                    margin: 1em auto;
-                    padding: 0 1em;
-                    line-height: 1.8;
-                    font-size: 1.1em;
-                    background-color: #cce8cf;
-                    color: #333333;
-                }
-                a { color: #0056b3; text-decoration: none; }
-                a:hover { text-decoration: underline; }
-                p, div, h1, h2, h3, h4, h5, h6 {
-                    margin-top: 0;
-                    margin-bottom: 1em;
-                    padding: 0;
-                    word-wrap: break-word;
-                }
-                p {
-                    text-indent: 2em;
-                }
-                
-    .chapter-navigation {
-        margin-top: 3em;
-        padding-top: 1.5em;
-        border-top: 1px solid #aaaaaa;
-        font-size: 1em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    .chapter-navigation a,
-    .chapter-navigation .disabled {
-        margin: 0 0.7em;
-        white-space: nowrap;
-    }
-    .chapter-navigation a {
-        color: #0056b3;
-        text-decoration: underline;
-    }
-    .chapter-navigation a:hover {
-        color: #003d7c;
-    }
-    .chapter-navigation .disabled {
-        color: #999999;
-        text-decoration: none;
-        cursor: not-allowed;
-    }
-    </style></head>
+            }
+            html { overflow-x: hidden; }
+            body { font-family: serif; max-width: 800px; margin: 1em auto; padding: 0 1em;
+                   line-height: 1.8; font-size: 1.1em; background-color: var(--body-bg); color: var(--text-color); }
+            a { color: var(--link-color); text-decoration: none; } a:hover { text-decoration: underline; }
+            p, div, h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 1em; padding: 0; word-wrap: break-word; }
+            p { text-indent: 2em; }
+            .chapter-navigation { margin-top: 3em; padding-top: 1.5em; border-top: 1px solid var(--nav-border);
+                                  font-size: 1em; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
+            .chapter-navigation a, .chapter-navigation .disabled { margin: 0 0.7em; white-space: nowrap; }
+            .chapter-navigation a { color: var(--link-color); text-decoration: underline; }
+            .chapter-navigation a:hover { color: var(--link-hover); }
+            .chapter-navigation .disabled { color: var(--disabled-color); text-decoration: none; cursor: not-allowed; }
+            </style></head>
 <body><h3><span class="border">第十一章</span><br/>　　谜团</h3>
 <blockquote>
 <p class="noindent">○　<span class="underline">为什么那个热血青年会突然变成懒汉　为什么偏偏是这个时候　为什么偏偏是这种举动</span></p>
@@ -69,7 +39,7 @@
 <p><br/></p>
 <p>万历十三年（1585），北京地区大旱，当年没有天气预报，也搞不了人工降雨，唯一的办法是求雨。</p>
 <p>虽然这招不一定灵，但干总比不干好。一般说来，求雨的人级别越高、越虔诚，求到雨的概率就越大。因为当时的人认为，龙王也有等级，也讲人际关系，降不降雨，降多少，什么时候降，马屁响不响，那是比较关键的。</p>
-
+<p class="picture"></p>
 <p class="p_sm noindent center kt">↑ 万历求雨路线</p>
 <p>而这一次，万历打算自己去。</p>
 <p>他求雨的地点，在南郊天坛。</p>
@@ -90,7 +60,7 @@
 <p><br/></p>
 <p>八百年后，宿命的转折再次到来，没有原因，没有预兆，停留在这个神秘的年份——万历十五年（1587）。</p>
 <p>简单说来，在这一年，发生了三件事情，两件不大的大事，一件不小的小事。</p>
-
+<p class="picture"></p>
 <p class="p_sm kt">★ 书内地图中日期皆为阴历</p>
 <p class="p_sm noindent center kt">↑ 万历十五年（1587）</p>
 <p>第一件大事：戚继光去世了。</p>
@@ -145,7 +115,7 @@
 <p>南京是明朝的第二首都，从六部到都察院，所有北京有的中央机构它都有，但毕竟皇帝大人住北京，所以除了南京户部（管理南方户籍）和南京兵部（统领南京军队）外，大多数机构都是摆设。</p>
 <p>一般说来，只有在朝廷混不下去的，才会被发配到南京，美其名曰：养老。</p>
 <p>都察院就是一个闲人部门，大家都没事干，骂人的自然也没事干，然而仅一夜之间，一切都已改变——海先生上任了。</p>
-
+<p class="picture"></p>
 <p class="p_sm noindent center kt">↑ 海瑞升迁历程</p>
 <p>由于上班没事可干，自然就没人去上班了，于是都察院的御史们总是自得其乐，逛街的逛街，看戏的看戏——工作没前途，还不准偷偷懒？</p>
 <p>海瑞先生的答案是不。他拿出了三十年前治理学生的方法来对付御史——记考勤。但凡敢于迟到早退的，必须到单位，哪怕没事干，也得坐在这里。</p>
@@ -203,7 +173,7 @@
 <p><br/></p>
 <p>在明代历史中，有很多疑团，比如建文帝之谜，比如明武宗之死，对于这类问题，我一向极有兴趣，研究之后，多少也能略得一二，只有这个谜题，我始终未能解开。</p>
 <p class="p_title noindent center ht">万历不上朝之谜</p>
-
+<p class="picture"></p>
 <p>为什么那个热血青年会突然变成懒汉？为什么偏偏是这个时候？为什么偏偏是这种举动？</p>
 <p>一般说来，人性的突然转变，往往是因为受了某种较大的刺激，那么到底是什么刺激？在万历十五年（1587）的深宫之中，到底发生了什么？</p>
 <p>以上问题，全然不知。</p>

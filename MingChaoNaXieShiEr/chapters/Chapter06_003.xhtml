@@ -1,59 +1,29 @@
 <!--?xml version='1.0' encoding='utf-8'?--><!DOCTYPE html>
 <html epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
 <head><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>第三章 成熟</title><style>
-                html {
-                    overflow-x: hidden;
+            :root {
+                --body-bg: #C7EDCC; --text-color: #2E4033; --link-color: #005a5a;
+                --nav-border: #a5c5a9; --link-hover: #004848; --disabled-color: #7b8b7d;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root { 
+                    --body-bg: #6E7B6C; --text-color: #d1d1d1; --link-color: #a8d7a8;
+                    --nav-border: #535d52; --link-hover: #c3e3c3; --disabled-color: #929a91;
                 }
-                body {
-                    font-family: serif;
-                    max-width: 800px;
-                    margin: 1em auto;
-                    padding: 0 1em;
-                    line-height: 1.8;
-                    font-size: 1.1em;
-                    background-color: #cce8cf;
-                    color: #333333;
-                }
-                a { color: #0056b3; text-decoration: none; }
-                a:hover { text-decoration: underline; }
-                p, div, h1, h2, h3, h4, h5, h6 {
-                    margin-top: 0;
-                    margin-bottom: 1em;
-                    padding: 0;
-                    word-wrap: break-word;
-                }
-                p {
-                    text-indent: 2em;
-                }
-                
-    .chapter-navigation {
-        margin-top: 3em;
-        padding-top: 1.5em;
-        border-top: 1px solid #aaaaaa;
-        font-size: 1em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    .chapter-navigation a,
-    .chapter-navigation .disabled {
-        margin: 0 0.7em;
-        white-space: nowrap;
-    }
-    .chapter-navigation a {
-        color: #0056b3;
-        text-decoration: underline;
-    }
-    .chapter-navigation a:hover {
-        color: #003d7c;
-    }
-    .chapter-navigation .disabled {
-        color: #999999;
-        text-decoration: none;
-        cursor: not-allowed;
-    }
-    </style></head>
+            }
+            html { overflow-x: hidden; }
+            body { font-family: serif; max-width: 800px; margin: 1em auto; padding: 0 1em;
+                   line-height: 1.8; font-size: 1.1em; background-color: var(--body-bg); color: var(--text-color); }
+            a { color: var(--link-color); text-decoration: none; } a:hover { text-decoration: underline; }
+            p, div, h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 1em; padding: 0; word-wrap: break-word; }
+            p { text-indent: 2em; }
+            .chapter-navigation { margin-top: 3em; padding-top: 1.5em; border-top: 1px solid var(--nav-border);
+                                  font-size: 1em; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
+            .chapter-navigation a, .chapter-navigation .disabled { margin: 0 0.7em; white-space: nowrap; }
+            .chapter-navigation a { color: var(--link-color); text-decoration: underline; }
+            .chapter-navigation a:hover { color: var(--link-hover); }
+            .chapter-navigation .disabled { color: var(--disabled-color); text-decoration: none; cursor: not-allowed; }
+            </style></head>
 <body><h3><span class="border">第三章</span><br/>　　成熟</h3>
 <blockquote>
 <p class="noindent">○　<span class="underline">了解世界的黑暗与绝望　却从不放弃　并以悲天悯人之心去关怀所有不幸的人</span></p>
@@ -73,7 +43,7 @@
 <p>同时他还发现，原来这个世界上还有很多人不喜欢诗词书画，也没有那么多的忧伤哀愁，他们想要的只是一碗掺着沙子的米饭。对那些骨瘦如柴、眼窝深陷的饥民而言，一幅字画是王羲之的还是怀素的，一点儿也不重要，重要的是那张字画的纸够不够厚，方不方便消化。</p>
 <p>在看到那些倒毙在街头、无人理会也无人收拾的尸体时，他有时也会想，这些人生前是不是也有过妻子、丈夫、孩子，是不是也曾有过欢笑的生活，幸福的家。</p>
 <p>就在张居正为此痛心疾首之时，一个冤家却再次找上了门来。</p>
-
+<p class="picture"></p>
 <p>这个人就是辽王。说起来，这实在是个缺心眼的家伙，听说张居正回来了，竟然主动找来，只为了一个目的——玩。</p>
 <p>作为一个藩王，待在荆州这么个小地方，平时又不能走远，只能搞点儿吃喝嫖赌，真是大大的没趣。所以在他看来，张居正可谓是供消遣的最好人选。</p>
 <p>这位仁兄还很健忘，他似乎不记得眼前这个玩伴的祖父曾被自己活活害死。而张居正则成为了玩具，被叫到王府，陪这位公子哥每天饮酒作诗，强颜欢笑。</p>
@@ -150,14 +120,14 @@
 <p>高拱这个人人如其名，性格高傲且极其难拱，与他同朝为官的人很少能成为他的朋友，因为他不但自负才高，且常常藐视同事和上级，动不动就是一句：你们这帮蠢……</p>
 <p>或许你会奇怪，这人自己不蠢吗，群众基础如此之差，怎么还能升官？我告诉你，高先生可不蠢，你要知道，他虽然瞧不起上级同事，却很尊重老板（皇帝）。经常写青词送给嘉靖，且文辞优美，当时的大臣们公认，他写这种马屁文章的水平可排第二（第一名是状元李春芳），徐阶都要靠边站。</p>
 <p class="p_title noindent center ht">裕王府四大讲官</p>
-
+<p class="picture"></p>
 <p>更何况，他手里还捏着一个裕王，有如此雄厚的资源，鄙视也罢，骂也罢，你能怎样？</p>
 <p>所以他的朋友很少，郭朴算一个，张居正也算一个。</p>
 <p><br/></p>
 <p>郭朴是他的同乡兼战友，就不多说了，而张居正之所以能成为他的朋友，完全是靠实力。</p>
 <p>高拱曾经对人说过，满朝文武，除叔大（张居正字叔大）外，尽为无能之辈。</p>
 <p>刚到国子监的时候，高拱对自己的这位副手十分不以为然，把张居正当下人使唤，呼来喝去。人家到底是个副校长，这要换了个人，估计早就闹起来了。</p>
-
+<p class="picture"></p>
 <p>然而，张居正一声不吭，只是埋头做事，短短几个月，就把原先无人问津的国子监搞得有声有色。高拱就此对他刮目相看。</p>
 <p>几年之后，当两人以裕王讲官身份重逢的时候，高拱已经彻底了解了这个人的学识和器量，于是他第一次放下了架子，每次见到张居正，居然会主动行礼，而且经常找他聊天，交流思想。</p>
 <p>久而久之，两人成了要好的朋友，还经常一起相约出去游玩。正是在一次郊游之中，高拱向张居正袒露了自己内心的秘密。</p>
@@ -248,7 +218,7 @@
 <p>凭借着这封遗诏（作者大家心里有数），徐阶的威望达到了顶点，权势也如日中天，高拱的气焰被打压了下去。但此招最为高明之处却并不在此。</p>
 <p>天真的张居正并不知道，当他提起笔、写下第一个字的那一刻，他与高拱已经彻底决裂。</p>
 <p>正是因为遗诏极为重要，所以根据惯例，其拟定必须由内阁大臣共同商议决定，但在那天夜晚，到达现场的人，却只有一个徐阶，高拱、郭朴、李春芳都不知道，统统被放了鸽子，这是大忌中的大忌。</p>
-
+<p class="picture"></p>
 <p>李春芳是个老实人，也就算了，高拱和郭朴却不是好打发的。竟敢背着我们吃独食？饶不了你！</p>
 <p>不久高拱得知，与徐阶一同草拟文件的还有一个人，而此人竟然就是张居正。张居正是什么级别？凭什么拟遗诏！</p>
 <div class="cankao">
@@ -354,7 +324,7 @@
 <p>“为什么你会回来医治这些人？”</p>
 <p>他笑着回答：</p>
 <p class="p_title noindent center ht">《本草纲目》的成就</p>
-
+<p class="picture"></p>
 <p>“因为我本就是个医生啊！”</p>
 <p>这就是最终的答案。</p>
 <p><br/></p>

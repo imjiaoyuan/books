@@ -1,59 +1,29 @@
 <!--?xml version='1.0' encoding='utf-8'?--><!DOCTYPE html>
 <html epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
 <head><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>第二章 天才的对弈</title><style>
-                html {
-                    overflow-x: hidden;
+            :root {
+                --body-bg: #C7EDCC; --text-color: #2E4033; --link-color: #005a5a;
+                --nav-border: #a5c5a9; --link-hover: #004848; --disabled-color: #7b8b7d;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root { 
+                    --body-bg: #6E7B6C; --text-color: #d1d1d1; --link-color: #a8d7a8;
+                    --nav-border: #535d52; --link-hover: #c3e3c3; --disabled-color: #929a91;
                 }
-                body {
-                    font-family: serif;
-                    max-width: 800px;
-                    margin: 1em auto;
-                    padding: 0 1em;
-                    line-height: 1.8;
-                    font-size: 1.1em;
-                    background-color: #cce8cf;
-                    color: #333333;
-                }
-                a { color: #0056b3; text-decoration: none; }
-                a:hover { text-decoration: underline; }
-                p, div, h1, h2, h3, h4, h5, h6 {
-                    margin-top: 0;
-                    margin-bottom: 1em;
-                    padding: 0;
-                    word-wrap: break-word;
-                }
-                p {
-                    text-indent: 2em;
-                }
-                
-    .chapter-navigation {
-        margin-top: 3em;
-        padding-top: 1.5em;
-        border-top: 1px solid #aaaaaa;
-        font-size: 1em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    .chapter-navigation a,
-    .chapter-navigation .disabled {
-        margin: 0 0.7em;
-        white-space: nowrap;
-    }
-    .chapter-navigation a {
-        color: #0056b3;
-        text-decoration: underline;
-    }
-    .chapter-navigation a:hover {
-        color: #003d7c;
-    }
-    .chapter-navigation .disabled {
-        color: #999999;
-        text-decoration: none;
-        cursor: not-allowed;
-    }
-    </style></head>
+            }
+            html { overflow-x: hidden; }
+            body { font-family: serif; max-width: 800px; margin: 1em auto; padding: 0 1em;
+                   line-height: 1.8; font-size: 1.1em; background-color: var(--body-bg); color: var(--text-color); }
+            a { color: var(--link-color); text-decoration: none; } a:hover { text-decoration: underline; }
+            p, div, h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 1em; padding: 0; word-wrap: break-word; }
+            p { text-indent: 2em; }
+            .chapter-navigation { margin-top: 3em; padding-top: 1.5em; border-top: 1px solid var(--nav-border);
+                                  font-size: 1em; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
+            .chapter-navigation a, .chapter-navigation .disabled { margin: 0 0.7em; white-space: nowrap; }
+            .chapter-navigation a { color: var(--link-color); text-decoration: underline; }
+            .chapter-navigation a:hover { color: var(--link-hover); }
+            .chapter-navigation .disabled { color: var(--disabled-color); text-decoration: none; cursor: not-allowed; }
+            </style></head>
 <body><h3><span class="border">第二章</span><br/>　　天才的对弈</h3>
 <blockquote>
 <p class="noindent">○　<span class="underline">天下之能士尽在京城　而在我看来　能兴我学者并非华亭　亡我学也非分宜　兴亡只在江陵</span></p>
@@ -74,7 +44,7 @@
 <p>太监黄锦，这“太监”二字，在此的确是官称。黄锦是嘉靖还在藩国时，就跟在身边的伴读小宦，嘉靖即位后，自然有一番厚赏。纵然嘉靖一生，并没有给予过内廷官员们特别的地位，但黄锦的受封及赏赐，真的非比寻常。从嘉靖即位时起，到嘉靖皇帝大行，黄锦受过的赏赐要掰着手指来算：飞鱼、斗牛、坐龙、蟒袍、玉带、文绮，甚至还可以在宫禁范围内乘坐肩舆。恩宠可见一斑，由他来化解嘉靖的怒火，自然是药到病除。</p>
 </div>
 <p class="p_title noindent center ht">嘉靖不杀海瑞原因说</p>
-
+<p class="picture"></p>
 <p><br/></p>
 <p>海瑞就这样被关了起来，既不是有期，也不是无期，既不杀，也不放，连个说法都没有。他自己倒是很自在，每天照吃照睡，一点儿心理负担都没有。</p>
 <p>看起来命是保住了，实际上没有。</p>
@@ -98,7 +68,7 @@
 <p>事实上，在徐阶看来，海主事闹出的这点儿麻烦实在是小儿科，他现在急于解决的，是另一个极为棘手的问题。</p>
 <p><br/></p>
 <p>在严嵩当权那几年，内阁里只有徐阶给他跑腿，后来徐阶当权，就找来自己的门生袁炜入阁跑腿。可是这位袁先生似乎不打算当狗腿子，压根儿没把老师放在眼里，时不时还要和徐阶吵一架。徐大人当然不会生气，但自然免不了给袁炜穿穿小鞋，偏偏这位袁先生心理承受能力不强，郁闷之下竟然病了，嘉靖四十四年（1565）告病回了家。</p>
-
+<p class="picture"></p>
 <p>不听话地走了，就找两个听话的来，这两个人，一个叫严讷，一个叫李春芳。</p>
 <p>严讷兄就不多说了，他于嘉靖四十四年（1565）入阁，只干了八个月就病倒了，回了老家，内阁中只剩下了李春芳。</p>
 <p>这位李春芳同志，那就不能不说了，他的为人可以用一句话概括：厚道，太厚道了。</p>
@@ -148,7 +118,7 @@
 <p><br/></p>
 <p>话音还没落，高拱就发言了：</p>
 <p>“没错，您的资历老，应该陪着皇上。我和李春芳、郭朴都刚入阁不久，值班的事情您交给我们就是了。”</p>
-
+<p class="picture"></p>
 <p>徐阶当时就发火了。</p>
 <p>从字面上看，高拱的话似乎没错，还很得体，但在官场混了这么多年，徐阶自然明白这位下属的真正意思，估计高拱先生说话时候的语气也有点儿阴阳怪气，所以二十多年不动声色的徐首辅也生气了：严嵩老子都解决了，你小子算怎么回事？</p>
 <p>虽然发火，但是涵养还是有的，徐阶同志涨红了脸，一言不发，扬长而去。</p>
@@ -169,10 +139,10 @@
 <p>虽然走错了一步，在内阁中成为了少数派，但不要紧，事情还有挽回的余地，只要再拉一个人进来，就能再次战胜对手。</p>
 <div class="cankao">
 <p class="ht noindent center bold">参考消息：顾璘</p>
-
+<p class="picture"></p>
 <p>顾璘是明代有名的文化名人之一。身为“江东三才子”之一（另两人为刘麟、徐祯卿），诗词书法虽不是独步天下，但也可称一绝，一副墨宝流传到坊间，轻易便可价值千金。这位慧眼识才的老大人成就了张居正，可惜卒于嘉靖二十四年（1545），没有看见自己相中的人功成名就。到了清代道光年间，顾璘被后人纳为“沧浪亭五百名贤”之列，刻石像以纪念。</p>
 </div>
-
+<p class="picture"></p>
 <h4 class="sigil_not_in_toc">◆ 天才，就是天才</h4>
 <p>何心隐帮助徐阶除掉严嵩后，在京城晃了半年，当他飘然离京之时，曾对人说过这样一番话：</p>
 <p>“天下之能士尽在京城，而在我看来，能兴我学者并非华亭，亡我学也非分宜，兴亡只在江陵。”</p>
@@ -281,7 +251,7 @@
 <p><br/></p>
 <p>不管情绪上有多大变化，但对于自己的天赋，张举人还是很有信心的，他相信自己能够中第，然而，现实再次给他上了一课——名落孙山。</p>
 <p class="p_title noindent center ht">进士的出路</p>
-
+<p class="picture"></p>
 <p><br/></p>
 <p>这是一个张居正无法接受却不能不接受的事实，他的所有骄傲与虚荣都已彻底失去，只能狼狈地回到家乡，苦读不辍，等待下次机会。</p>
 <p>嘉靖二十六年（1547），张居正再次赴京赶考，此时他的心中只剩下一个念头：考中就好，考中就好。</p>

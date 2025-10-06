@@ -1,59 +1,29 @@
 <!--?xml version='1.0' encoding='utf-8'?--><!DOCTYPE html>
 <html epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
 <head><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>第九章</title><style>
-                html {
-                    overflow-x: hidden;
+            :root {
+                --body-bg: #C7EDCC; --text-color: #2E4033; --link-color: #005a5a;
+                --nav-border: #a5c5a9; --link-hover: #004848; --disabled-color: #7b8b7d;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root { 
+                    --body-bg: #6E7B6C; --text-color: #d1d1d1; --link-color: #a8d7a8;
+                    --nav-border: #535d52; --link-hover: #c3e3c3; --disabled-color: #929a91;
                 }
-                body {
-                    font-family: serif;
-                    max-width: 800px;
-                    margin: 1em auto;
-                    padding: 0 1em;
-                    line-height: 1.8;
-                    font-size: 1.1em;
-                    background-color: #cce8cf;
-                    color: #333333;
-                }
-                a { color: #0056b3; text-decoration: none; }
-                a:hover { text-decoration: underline; }
-                p, div, h1, h2, h3, h4, h5, h6 {
-                    margin-top: 0;
-                    margin-bottom: 1em;
-                    padding: 0;
-                    word-wrap: break-word;
-                }
-                p {
-                    text-indent: 2em;
-                }
-                
-    .chapter-navigation {
-        margin-top: 3em;
-        padding-top: 1.5em;
-        border-top: 1px solid #aaaaaa;
-        font-size: 1em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    .chapter-navigation a,
-    .chapter-navigation .disabled {
-        margin: 0 0.7em;
-        white-space: nowrap;
-    }
-    .chapter-navigation a {
-        color: #0056b3;
-        text-decoration: underline;
-    }
-    .chapter-navigation a:hover {
-        color: #003d7c;
-    }
-    .chapter-navigation .disabled {
-        color: #999999;
-        text-decoration: none;
-        cursor: not-allowed;
-    }
-    </style></head>
+            }
+            html { overflow-x: hidden; }
+            body { font-family: serif; max-width: 800px; margin: 1em auto; padding: 0 1em;
+                   line-height: 1.8; font-size: 1.1em; background-color: var(--body-bg); color: var(--text-color); }
+            a { color: var(--link-color); text-decoration: none; } a:hover { text-decoration: underline; }
+            p, div, h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 1em; padding: 0; word-wrap: break-word; }
+            p { text-indent: 2em; }
+            .chapter-navigation { margin-top: 3em; padding-top: 1.5em; border-top: 1px solid var(--nav-border);
+                                  font-size: 1em; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
+            .chapter-navigation a, .chapter-navigation .disabled { margin: 0 0.7em; white-space: nowrap; }
+            .chapter-navigation a { color: var(--link-color); text-decoration: underline; }
+            .chapter-navigation a:hover { color: var(--link-hover); }
+            .chapter-navigation .disabled { color: var(--disabled-color); text-decoration: none; cursor: not-allowed; }
+            </style></head>
 <body><h2 class="calibre5" id="calibre_pb_0">第九章</h2>
 <p class="calibre6">两年之后，我想起那一天的其余时间、那一夜和第二天，记忆中只有警察、摄影师和新闻记者在盖茨比的前门进进出出，无休止地反复调查。一根绳子拦住了大门，一个警察守在旁边，挡开那些看热闹的好奇者，但小男孩们很快就发现可以穿过我的院子进来，因此总有几个男孩聚集在游泳池周围，惊讶得目瞪口呆。那天下午，一个举止自信的人，或许是侦探，在威尔逊的尸体上俯身查看时使用了“疯子”一词的表达法，他的嗓音偶然流露的权威性，给第二天早晨的新闻报道定下了基调。</p>
 <p class="calibre6">那些报道多半是噩梦——稀奇古怪、不得要领、热情虚妄，而且无中生有。当米凯利斯在接受调查时，他的证词曝光了威尔逊对他妻子的猜忌，我以为整个故事很快就会在黄色小报上添油加醋地和盘托出——可是凯瑟琳，本来可以说出一切，却守口如瓶，并没吐露一个字。对于这件事，她表现出了惊人的个性——她那描过的眉毛下面，那双毅然决然的眼睛看着验尸官，发誓说她的姐姐从来没见过盖茨比，说她的姐姐跟姐夫在一起生活得幸福美满，还说她的姐姐没有任何出轨行为。她说得很真切，连她自己都相信了，还用手巾捂着脸号啕大哭，仿佛她根本无法忍受这样的暗示和联想。因此威尔逊就被归纳为一个“由于悲伤而精神失常”的人，使得这桩案子可以保持最简单的形式，这样也就结案了。</p>
@@ -77,7 +47,7 @@
 <p class="calibre6">第二天早晨，我派管家带着一封信前往纽约去找沃尔夫希姆，打探相关消息，敦促他搭乘下一班火车赶来。我写信的时候，这样的请求似乎多余。我确信，当他看到报纸上的消息，他就会动身赶来，正如我确信黛西会在中午之前拍来电报一样——可是，黛西并没拍电报来，沃尔夫希姆先生也没赶来，除了更多的警察、摄影师和新闻记者，没有什么人赶来。当管家带来沃尔夫希姆的回信，我开始产生了一种蔑视感，感到盖茨比和我之间的那种藐视性的团结可以对抗他们所有人。</p>
 <p class="kaitizili">亲爱的卡拉韦先生：</p>
 <p class="kaitizili">对于我，这个噩耗是我生活中最可怕的震惊，我几乎无法完全相信这是真的。那个家伙如此疯狂的行为，应该让我们大家都加以思考。因为我缠身于一件很重要的事情，因此目前无法赶过来，我也不能牵扯到这件事情里面。稍过一段时间之后，如果有任何事情需要我效劳，请派埃德加送信来告诉我就是了。当我听到这样的噩耗，我几乎不知道自己身在何处，震惊得完全不知所措。</p>
-
+<p class="kaitizili"></p>
 <p class="kaitizili">您忠实的，</p>
 <p class="kaitizili">迈耶·沃尔夫希姆</p>
 <p class="calibre6">下面又匆匆附加了一句：</p>
@@ -174,7 +144,7 @@
 <p class="kaitizili">棒球及其他运动…………………4:30 — 5:00</p>
 <p class="kaitizili">练习演说、仪态及成功方式……5:00 — 6:00</p>
 <p class="kaitizili">研究有用的新发明………………7:00 — 9:00</p>
-
+<p class="kaitizili"></p>
 <p class="kaitizili">总体决心</p>
 <p class="kaitizili">不把时间浪费在沙夫特家或者【一个名字，字迹难辨】</p>
 <p class="kaitizili">不再抽烟或咀嚼烟叶</p>

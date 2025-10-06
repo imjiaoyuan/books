@@ -1,59 +1,29 @@
 <!--?xml version='1.0' encoding='utf-8'?--><!DOCTYPE html>
 <html epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
 <head><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>第十二章 野心的起始</title><style>
-                html {
-                    overflow-x: hidden;
+            :root {
+                --body-bg: #C7EDCC; --text-color: #2E4033; --link-color: #005a5a;
+                --nav-border: #a5c5a9; --link-hover: #004848; --disabled-color: #7b8b7d;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root { 
+                    --body-bg: #6E7B6C; --text-color: #d1d1d1; --link-color: #a8d7a8;
+                    --nav-border: #535d52; --link-hover: #c3e3c3; --disabled-color: #929a91;
                 }
-                body {
-                    font-family: serif;
-                    max-width: 800px;
-                    margin: 1em auto;
-                    padding: 0 1em;
-                    line-height: 1.8;
-                    font-size: 1.1em;
-                    background-color: #cce8cf;
-                    color: #333333;
-                }
-                a { color: #0056b3; text-decoration: none; }
-                a:hover { text-decoration: underline; }
-                p, div, h1, h2, h3, h4, h5, h6 {
-                    margin-top: 0;
-                    margin-bottom: 1em;
-                    padding: 0;
-                    word-wrap: break-word;
-                }
-                p {
-                    text-indent: 2em;
-                }
-                
-    .chapter-navigation {
-        margin-top: 3em;
-        padding-top: 1.5em;
-        border-top: 1px solid #aaaaaa;
-        font-size: 1em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    .chapter-navigation a,
-    .chapter-navigation .disabled {
-        margin: 0 0.7em;
-        white-space: nowrap;
-    }
-    .chapter-navigation a {
-        color: #0056b3;
-        text-decoration: underline;
-    }
-    .chapter-navigation a:hover {
-        color: #003d7c;
-    }
-    .chapter-navigation .disabled {
-        color: #999999;
-        text-decoration: none;
-        cursor: not-allowed;
-    }
-    </style></head>
+            }
+            html { overflow-x: hidden; }
+            body { font-family: serif; max-width: 800px; margin: 1em auto; padding: 0 1em;
+                   line-height: 1.8; font-size: 1.1em; background-color: var(--body-bg); color: var(--text-color); }
+            a { color: var(--link-color); text-decoration: none; } a:hover { text-decoration: underline; }
+            p, div, h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 1em; padding: 0; word-wrap: break-word; }
+            p { text-indent: 2em; }
+            .chapter-navigation { margin-top: 3em; padding-top: 1.5em; border-top: 1px solid var(--nav-border);
+                                  font-size: 1em; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
+            .chapter-navigation a, .chapter-navigation .disabled { margin: 0 0.7em; white-space: nowrap; }
+            .chapter-navigation a { color: var(--link-color); text-decoration: underline; }
+            .chapter-navigation a:hover { color: var(--link-hover); }
+            .chapter-navigation .disabled { color: var(--disabled-color); text-decoration: none; cursor: not-allowed; }
+            </style></head>
 <body><h3><span class="border">第十二章</span><br/>　　野心的起始</h3>
 <blockquote>
 <p class="noindent">○　<span class="underline">日本人不懂得　所以他们失败了　以前如此　现在如此　将来依然如此</span></p>
@@ -70,7 +40,7 @@
 <p>日本的管理体制，天皇下面是将军，将军下面是大名，也就是各地的诸侯，既然天皇没屁用，将军又过了期，就轮到大名说话了。</p>
 <p>所谓大名，也没个谱，在那年头，只要你有兵有地盘，就是大名。日本国家不大，闹事的人却多，转瞬之间冒出来几十个大名，个个有名有姓，占山为王，什么羽前羽后，越前越后，土佐中国，上总下总（全都是日本地名），看起来好似广阔，其实许多地方也就是个县城。</p>
 <p>说句寒酸话，日本历史中大书特书的所谓战国时代，也就是几十个县长（个别还是乡长）打来打去的历史，更讽刺的是，最后统一县长们的，竟然是个农民。</p>
-
+<p class="picture"></p>
 <p><br/></p>
 <p>丰臣秀吉，原名木下藤吉郎，本来在乡下种地，后来种不下去了，就出去做小生意，正好到处打仗，他就去参了军，在县长大名织田信长的手下混碗饭吃。</p>
 <p>偏巧这人种地、做生意都不行，打仗谋略倒是一把好手，从小兵干起，步兵队长、步兵大队长、家老、部将，一级级地升，最后成了织田县长的第一亲信。由于这人长得很丑，和猿猴有几分神似，所以织田县长给他取了个外号——猴子。</p>
@@ -88,7 +58,7 @@
 <p><br/></p>
 <p>当然，猴子兄的目的只限于征服朝鲜、中国、印度及东南亚，这并非他太过谨慎，实在是因为他一天到晚待在岛上，地理知识有限，不知道什么法国、德国。对他而言，世界就那么几个国家而已。</p>
 <p>其实丰臣兄并非特例，事实证明，心理阴暗之辈一直后继有人，后来的如近卫文麿、东条英机之流，都是一路货。在他们的心中，从没有什么和平发展之类的概念，总觉得别人的比自己的好，抢劫的比生产的好，而他们的世界观也有着惊人的一致：</p>
-
+<p class="picture"></p>
 <p class="p_sm noindent center kt">↑ 日本人几百年不灭的征服梦</p>
 <p>欲征服世界，必先征服亚洲；欲征服亚洲，必先征服中国。</p>
 <p>从爷爷开始，到孙子，再到孙子的孙子，这帮孙子几百年来做着同一个梦，却始终不醒，实在是难能可贵。</p>
@@ -193,7 +163,7 @@
 <p>第七军：毛利辉元，三万人。</p>
 <p>第八军：宇喜多秀家，一万一千人。</p>
 <p>第九军：羽柴秀胜，一万一千人。</p>
-
+<p class="picture"></p>
 <p class="p_sm noindent center kt">↑ 日军进攻朝鲜路线</p>
 <p>之所以列出这帮鬼子的姓名和军队人数，是因为其中大有奥妙。</p>
 <p>以上九位鬼子军官的名字，中国人看了可能毫无感觉，但在日本国内，这帮人可谓是如雷贯耳，大有来头。</p>
@@ -239,7 +209,7 @@
 <p><br/></p>
 <p>李舜臣，字汝谐，德水人。在那场惨烈的战争中，被捧为名将的人非常多，但在我看来，其中名副其实者，不过几人而已。而李舜臣，正是其中的一员。</p>
 <p>说起来，李舜臣的成分相当高，据说他祖辈上是朝鲜王族（也有说是平民），从小苦读诗书，武科毕业后，就去了边界。在那里，他遇到了一群十分厉害的对手——女真。</p>
-
+<p class="picture"></p>
 <p>可是在对方的骑兵面前，李舜臣的表现却非常一般，经常打败仗。虽然在长期的战斗中，他积累了丰富的军事经验，但至少在那时，瞧得起他的人实在不多，所谓“民族英雄”“军事天才”这样的词语，跟他更是毫不沾边。</p>
 <p>但时机终于到来。不久之后，在朝鲜丞相柳成龙的推举下，他升任佥事，并获得了一个新的职务——全罗道水军节度使。</p>
 <p>正是这个职务，改变了他一生的命运。</p>
@@ -294,14 +264,14 @@
 <p>虽然这船的长相和乌龟很有几分神似，但事实证明，真用起来，这玩意儿比乌龟生猛得多，那可是真要人命。</p>
 <p>在龟船的四周，分布着七十多个火枪口，用来对外发射火枪，从远处打击敌人。而船只的前后，都装有锋利的撞杆，用来撞击敌船，大致是打不死你，也撞死你。</p>
 <p>此外，龟船的船首带有大口径火炮，威力强大。更为难得的是，李舜臣还善于观察动物，模仿章鱼，创造性地发明了烟幕弹，追击敌船之时，龟首可以发射炮弹，如果形势不妙，龟首口中即释放浓烟，掩护部队撤退。</p>
-
+<p class="picture"></p>
 <p>就这么个玩意儿，远轰近撞，打不赢还能跑，说它是超级乌龟，那是一点儿也不夸张。</p>
 <p><br/></p>
 <p>不过，这种全封闭式的战舰也是有弱点的：由于外部无人警戒，如果被人接近，跳上船（学名：跳帮），就毫无防卫能力，任人宰割。</p>
 <p>当然，这个弱点只是理论上的，为防止有人跳帮，李舜臣十分体贴地在船身周围设置了无数铁钩、铁钉，确保敢于跳船者在第一时间被彻底扎透、扎穿。</p>
 <p>总而言之，这种乌龟能轰大炮，能放火枪，能撞，浑身上下带刺，见势不妙还能吐烟逃跑，除了不能咬人外，基本上算是全能型乌龟。</p>
 <p>后来的舰船学家们几乎一致认定，在当时，龟船是世界上最为强大的战舰。</p>
-
+<p class="picture"></p>
 <p class="p_sm noindent center kt">↑ 玉浦海战</p>
 <p>藤堂高虎当然不知道这个结论，他只知道自己人多船大，占据优势，在短暂观察之后，他下达了全军突击令。</p>
 <p>然而仅仅半个时辰（一个小时）后，他就下达了第二道命令——弃船令。</p>
@@ -338,7 +308,7 @@
 <p>事实证明，他的担心是多余的，十分多余。</p>
 <p><br/></p>
 <p>联合舰队日夜兼程，抱着绝不打游击的觉悟，向全罗道赶去。然而就在半路上，他们的觉悟提前实现了，因为李舜臣，就在他们的面前。</p>
-
+<p class="picture"></p>
 <p class="p_sm noindent center kt">↑ 闲山岛海战</p>
 <p>在得到日军总攻击的消息后，李舜臣十分兴奋。他已经厌倦了小打小闹，于是连夜带领海军主力，于八月三日到达庆尚道闲山岛，找到了那些想找他的人。</p>
 <p>虽然李舜臣实在有点儿过于积极，虽然日军的指挥官们个个目瞪口呆，但既然人都到了，咱们就开打吧。</p>

@@ -1,75 +1,33 @@
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Contents - 双城记</title>
-        <style>
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                max-width: 800px;
-                margin: 0 auto;
-                padding: 2em;
-                background-color: #ffffff;
-                color: #343a40;
+    <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Contents - 双城记</title>
+    <style>
+        :root {
+            --bg-color: #ffffff; --text-color: #343a40; --header-color: #2c3e50;
+            --header-border: #dee2e6; --link-color: #0056b3; --link-hover: #003d7c;
+            --item-border: #e9ecef; --item-hover-bg: #eef2f7; --nested-text: #5a6268;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1c1c1c; --text-color: #e0e0e0; --header-color: #f1f1f1;
+                --header-border: #444444; --link-color: #90caff; --link-hover: #c7e1ff;
+                --item-border: #3a3a3a; --item-hover-bg: #2a2a2a; --nested-text: #bbbbbb;
             }
-            .header {
-                display: flex;
-                justify-content: space-between;
-                align-items: baseline;
-                border-bottom: 1px solid #dee2e6;
-                padding-bottom: 1em;
-                margin-bottom: 2em;
-            }
-            h1 {
-                font-size: 2em;
-                font-weight: 500;
-                color: #2c3e50;
-                margin: 0;
-            }
-            .bookshelf-link a {
-                color: #0056b3;
-                text-decoration: underline;
-                font-size: 1em;
-            }
-            .bookshelf-link a:hover {
-                color: #003d7c;
-            }
-            ul {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-            }
-            li a {
-                display: block;
-                padding: 0.9em 1.2em;
-                text-decoration: none;
-                color: #343a40;
-                font-size: 1.1em;
-                border-bottom: 1px solid #e9ecef;
-                transition: background-color 0.2s ease, color 0.2s ease;
-            }
-            li:first-child a {
-                border-top: 1px solid #e9ecef;
-            }
-            li a:hover {
-                background-color: #eef2f7;
-                color: #0056b3;
-            }
-            .nested-list a {
-                padding-left: 2.4em;
-                font-size: 1em;
-                color: #5a6268;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="header">
-            <h1>双城记</h1>
-            <div class="bookshelf-link"><a href="../index.html">Back to Bookshelf</a></div>
-        </div>
-        <div><ul><li><a href="chapters/part0003.xhtml">序言</a></li><li><a href="chapters/part0004.xhtml">第一卷 起死回生</a><ul class="nested-list"><li><a href="chapters/part0005.xhtml">第一章 时代</a></li><li><a href="chapters/part0006.xhtml">第二章 邮车</a></li><li><a href="chapters/part0007.xhtml">第三章 夜影</a></li><li><a href="chapters/part0008.xhtml">第四章 准备</a></li><li><a href="chapters/part0009.xhtml">第五章 酒铺</a></li><li><a href="chapters/part0010.xhtml">第六章 鞋匠</a></li></ul></li><li><a href="chapters/part0011.xhtml">第二卷 金色丝线</a><ul class="nested-list"><li><a href="chapters/part0012.xhtml">第一章 五年之后</a></li><li><a href="chapters/part0013.xhtml">第二章 观者如堵</a></li><li><a href="chapters/part0014.xhtml">第三章 眼福未饱</a></li><li><a href="chapters/part0015.xhtml">第四章 庆贺逃生</a></li><li><a href="chapters/part0016.xhtml">第五章 为狮猎食</a></li><li><a href="chapters/part0017.xhtml">第六章 宾客数百</a></li><li><a href="chapters/part0018.xhtml">第七章 大人进城</a></li><li><a href="chapters/part0019.xhtml">第八章 大人回乡</a></li><li><a href="chapters/part0020.xhtml">第九章 女妖之头</a></li><li><a href="chapters/part0021.xhtml">第十章 两相许诺</a></li><li><a href="chapters/part0022.xhtml">第十一章 另一光景</a></li><li><a href="chapters/part0023.xhtml">第十二章 善体恤者</a></li><li><a href="chapters/part0024.xhtml">第十三章 不体恤者</a></li><li><a href="chapters/part0025.xhtml">第十四章 正经商人</a></li><li><a href="chapters/part0026.xhtml">第十五章 编织毛线</a></li><li><a href="chapters/part0027.xhtml">第十六章 一直编织</a></li><li><a href="chapters/part0028.xhtml">第十七章 难忘之夜</a></li><li><a href="chapters/part0029.xhtml">第十八章 九天九夜</a></li><li><a href="chapters/part0030.xhtml">第十九章 一则高见</a></li><li><a href="chapters/part0031.xhtml">第二十章 一个请求</a></li><li><a href="chapters/part0032.xhtml">第二十一章 足音回响</a></li><li><a href="chapters/part0033.xhtml">第二十二章 波澜壮阔</a></li><li><a href="chapters/part0034.xhtml">第二十三章 星火燎原</a></li><li><a href="chapters/part0035.xhtml">第二十四章 吸赴魔礁</a></li></ul></li><li><a href="chapters/part0036.xhtml">第三卷 风踪雨迹</a><ul class="nested-list"><li><a href="chapters/part0037.xhtml">第一章 秘密监禁</a></li><li><a href="chapters/part0038.xhtml">第二章 磨刀霍霍</a></li><li><a href="chapters/part0039.xhtml">第三章 阴影逼来</a></li><li><a href="chapters/part0040.xhtml">第四章 风暴暂息</a></li><li><a href="chapters/part0041.xhtml">第五章 锯木嚓嚓</a></li><li><a href="chapters/part0042.xhtml">第六章 胜利而归</a></li><li><a href="chapters/part0043.xhtml">第七章 有人敲门</a></li><li><a href="chapters/part0044.xhtml">第八章 斗牌好手</a></li><li><a href="chapters/part0045.xhtml">第九章 赌局已定</a></li><li><a href="chapters/part0046.xhtml">第十章 虚影实显</a></li><li><a href="chapters/part0047.xhtml">第十一章 暮色朦胧</a></li><li><a href="chapters/part0048.xhtml">第十二章 黑夜深沉</a></li><li><a href="chapters/part0049.xhtml">第十三章 五十二个</a></li><li><a href="chapters/part0050.xhtml">第十四章 编织完结</a></li><li><a href="chapters/part0051.xhtml">第十五章 足音永逝</a></li></ul></li><li><a href="chapters/part0052.xhtml">译后记</a></li><li><a href="chapters/part0053.xhtml">注释</a></li></ul></div>
-    </body>
-    </html>
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+               max-width: 800px; margin: 0 auto; padding: 2em; background-color: var(--bg-color); color: var(--text-color); }
+        .header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--header-border);
+                  padding-bottom: 1em; margin-bottom: 2em; }
+        h1 { font-size: 2em; font-weight: 500; color: var(--header-color); margin: 0; }
+        .bookshelf-link a { color: var(--link-color); text-decoration: underline; font-size: 1em; }
+        .bookshelf-link a:hover { color: var(--link-hover); }
+        ul { list-style: none; padding: 0; margin: 0; }
+        li a { display: block; padding: 0.9em 1.2em; text-decoration: none; color: var(--text-color);
+                font-size: 1.1em; border-bottom: 1px solid var(--item-border); transition: background-color 0.2s ease, color 0.2s ease; }
+        li:first-child a { border-top: 1px solid var(--item-border); }
+        li a:hover { background-color: var(--item-hover-bg); color: var(--link-hover); }
+        .nested-list a { padding-left: 2.4em; font-size: 1em; color: var(--nested-text); }
+    </style></head><body>
+        <div class="header"><h1>双城记</h1><div class="bookshelf-link"><a href="../index.html">Back to Bookshelf</a></div></div>
+        <div><ul class=""><li><a href="chapters/part0003.xhtml">序言</a></li><li><a href="chapters/part0004.xhtml">第一卷 起死回生</a><ul class="nested-list"><li><a href="chapters/part0005.xhtml">第一章 时代</a></li><li><a href="chapters/part0006.xhtml">第二章 邮车</a></li><li><a href="chapters/part0007.xhtml">第三章 夜影</a></li><li><a href="chapters/part0008.xhtml">第四章 准备</a></li><li><a href="chapters/part0009.xhtml">第五章 酒铺</a></li><li><a href="chapters/part0010.xhtml">第六章 鞋匠</a></li></ul></li><li><a href="chapters/part0011.xhtml">第二卷 金色丝线</a><ul class="nested-list"><li><a href="chapters/part0012.xhtml">第一章 五年之后</a></li><li><a href="chapters/part0013.xhtml">第二章 观者如堵</a></li><li><a href="chapters/part0014.xhtml">第三章 眼福未饱</a></li><li><a href="chapters/part0015.xhtml">第四章 庆贺逃生</a></li><li><a href="chapters/part0016.xhtml">第五章 为狮猎食</a></li><li><a href="chapters/part0017.xhtml">第六章 宾客数百</a></li><li><a href="chapters/part0018.xhtml">第七章 大人进城</a></li><li><a href="chapters/part0019.xhtml">第八章 大人回乡</a></li><li><a href="chapters/part0020.xhtml">第九章 女妖之头</a></li><li><a href="chapters/part0021.xhtml">第十章 两相许诺</a></li><li><a href="chapters/part0022.xhtml">第十一章 另一光景</a></li><li><a href="chapters/part0023.xhtml">第十二章 善体恤者</a></li><li><a href="chapters/part0024.xhtml">第十三章 不体恤者</a></li><li><a href="chapters/part0025.xhtml">第十四章 正经商人</a></li><li><a href="chapters/part0026.xhtml">第十五章 编织毛线</a></li><li><a href="chapters/part0027.xhtml">第十六章 一直编织</a></li><li><a href="chapters/part0028.xhtml">第十七章 难忘之夜</a></li><li><a href="chapters/part0029.xhtml">第十八章 九天九夜</a></li><li><a href="chapters/part0030.xhtml">第十九章 一则高见</a></li><li><a href="chapters/part0031.xhtml">第二十章 一个请求</a></li><li><a href="chapters/part0032.xhtml">第二十一章 足音回响</a></li><li><a href="chapters/part0033.xhtml">第二十二章 波澜壮阔</a></li><li><a href="chapters/part0034.xhtml">第二十三章 星火燎原</a></li><li><a href="chapters/part0035.xhtml">第二十四章 吸赴魔礁</a></li></ul></li><li><a href="chapters/part0036.xhtml">第三卷 风踪雨迹</a><ul class="nested-list"><li><a href="chapters/part0037.xhtml">第一章 秘密监禁</a></li><li><a href="chapters/part0038.xhtml">第二章 磨刀霍霍</a></li><li><a href="chapters/part0039.xhtml">第三章 阴影逼来</a></li><li><a href="chapters/part0040.xhtml">第四章 风暴暂息</a></li><li><a href="chapters/part0041.xhtml">第五章 锯木嚓嚓</a></li><li><a href="chapters/part0042.xhtml">第六章 胜利而归</a></li><li><a href="chapters/part0043.xhtml">第七章 有人敲门</a></li><li><a href="chapters/part0044.xhtml">第八章 斗牌好手</a></li><li><a href="chapters/part0045.xhtml">第九章 赌局已定</a></li><li><a href="chapters/part0046.xhtml">第十章 虚影实显</a></li><li><a href="chapters/part0047.xhtml">第十一章 暮色朦胧</a></li><li><a href="chapters/part0048.xhtml">第十二章 黑夜深沉</a></li><li><a href="chapters/part0049.xhtml">第十三章 五十二个</a></li><li><a href="chapters/part0050.xhtml">第十四章 编织完结</a></li><li><a href="chapters/part0051.xhtml">第十五章 足音永逝</a></li></ul></li><li><a href="chapters/part0052.xhtml">译后记</a></li><li><a href="chapters/part0053.xhtml">注释</a></li></ul></div>
+    </body></html>
     
