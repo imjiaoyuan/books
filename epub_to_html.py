@@ -15,10 +15,32 @@ warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 def natural_sort_key(filename):
     return [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', filename)]
 
-def create_master_index(output_dir, books_list):
+def create_master_index(output_dir, updated_books):
+    master_index_path = os.path.join(output_dir, 'index.html')
+
+    all_books_map = {}
+
+    if os.path.exists(master_index_path):
+        with open(master_index_path, 'r', encoding='utf-8') as f:
+            soup = BeautifulSoup(f.read(), 'html.parser')
+            for li in soup.select('.book-list .book'):
+                a_tag = li.find('a')
+                span_tag = li.find('span')
+                if a_tag and span_tag and a_tag.has_attr('href'):
+                    path = a_tag['href']
+                    title = span_tag.get_text(strip=True)
+                    all_books_map[path] = title
+
+    for book in updated_books:
+        all_books_map[book['path']] = book['title']
+
+    sorted_books_list = [{'path': path, 'title': title} for path, title in all_books_map.items()]
+    sorted_books_list.sort(key=lambda x: x['title'])
+
     books_html_list = "".join(
-        f'<li class="book"><a href="{book["path"]}"><span>{book["title"]}</span></a></li>' for book in books_list
+        f'<li class="book"><a href="{book["path"]}"><span>{book["title"]}</span></a></li>' for book in sorted_books_list
     )
+    
     html_content = f"""
     <!DOCTYPE html>
     <html lang="zh-CN">
@@ -61,7 +83,7 @@ def create_master_index(output_dir, books_list):
     </body>
     </html>
     """
-    with open(os.path.join(output_dir, 'index.html'), 'w', encoding='utf-8') as f:
+    with open(master_index_path, 'w', encoding='utf-8') as f:
         f.write(html_content)
 
 def add_navigation_buttons(soup, prev_chapter, next_chapter):
@@ -224,7 +246,7 @@ if __name__ == '__main__':
         print(f"No .epub files found in '{input_directory}'.")
         sys.exit()
 
-    converted_books = []
+    processed_books = []
     for i, ebook_file_path in enumerate(ebook_files):
         book_name = os.path.basename(ebook_file_path)
         output_book_dir_name = os.path.splitext(book_name)[0]
@@ -233,24 +255,26 @@ if __name__ == '__main__':
         target_index_html = os.path.join(final_output_path, 'index.html')
         
         if os.path.exists(target_index_html):
-            source_mtime, target_mtime = os.path.getmtime(ebook_file_path), os.path.getmtime(target_index_html)
+            source_mtime = os.path.getmtime(ebook_file_path)
+            target_mtime = os.path.getmtime(target_index_html)
             if target_mtime > source_mtime:
                 print(f"Skipping [{i+1}/{len(ebook_files)}]: {book_name} (already up-to-date)")
                 book_title = os.path.splitext(book_name)[0]
-                try: book_title = epub.read_epub(ebook_file_path).get_metadata('DC', 'title')[0][0]
-                except Exception: pass
-                converted_books.append({'title': book_title, 'path': f"{output_book_dir_name}/index.html"})
+                try:
+                    book_title = epub.read_epub(ebook_file_path).get_metadata('DC', 'title')[0][0]
+                except Exception:
+                    pass
+                processed_books.append({'title': book_title, 'path': f"{output_book_dir_name}/index.html"})
                 continue
         
         print(f"Processing [{i+1}/{len(ebook_files)}]: {book_name}")
         try:
             book_title = convert_ebook_to_html(ebook_file_path, final_output_path)
-            converted_books.append({'title': book_title, 'path': f"{output_book_dir_name}/index.html"})
+            processed_books.append({'title': book_title, 'path': f"{output_book_dir_name}/index.html"})
         except Exception as e:
             print(f"  -> Failed to convert {book_name}: {e}")
-    
-    if converted_books:
-        print("Creating bookshelf index...")
-        create_master_index(main_output_directory, converted_books)
+
+    print("Updating bookshelf index...")
+    create_master_index(main_output_directory, processed_books)
     
     print("Done.")
