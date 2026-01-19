@@ -4,11 +4,12 @@ import glob
 import shutil
 import tempfile
 import re
+import argparse
 from ebooklib import epub
 import ebooklib
 from bs4 import BeautifulSoup
 
-def clean_file(file_path):
+def clean_file(file_path, output_path):
     book = epub.read_epub(file_path)
     new_items = []
     
@@ -36,29 +37,42 @@ def clean_file(file_path):
         new_items.append(item)
 
     book.items = new_items
-    
-    fd, tmp_path = tempfile.mkstemp()
-    os.close(fd)
-    epub.write_epub(tmp_path, book)
-    
-    os.remove(file_path)
-    shutil.move(tmp_path, file_path)
+    epub.write_epub(output_path, book)
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        sys.exit(1)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-i', dest='input', required=True)
+    parser.add_argument('-o', dest='output', required=True)
+    args = parser.parse_args()
 
-    target_dir = os.path.abspath(sys.argv[1])
-    if not os.path.isdir(target_dir):
-        sys.exit(1)
+    input_path = os.path.abspath(args.input)
+    output_path = os.path.abspath(args.output)
 
-    epub_files = glob.glob(os.path.join(target_dir, "*.epub"))
+    if os.path.isfile(input_path):
+        epub_files = [input_path]
+        if output_path.lower().endswith('.epub'):
+            tasks = [(input_path, output_path)]
+        else:
+            if not os.path.exists(output_path):
+                os.makedirs(output_path)
+            tasks = [(input_path, os.path.join(output_path, os.path.basename(input_path)))]
+    elif os.path.isdir(input_path):
+        if not os.path.exists(output_path):
+            os.makedirs(output_path)
+        epub_files = glob.glob(os.path.join(input_path, "*.epub"))
+        tasks = [(f, os.path.join(output_path, os.path.basename(f))) for f in epub_files]
+    else:
+        sys.exit(1)
     
-    for f in epub_files:
+    for f_in, f_out in tasks:
         try:
-            old_size = os.path.getsize(f)
-            clean_file(f)
-            new_size = os.path.getsize(f)
-            print(f"Processed {os.path.basename(f)}: {old_size//1024}KB -> {new_size//1024}KB")
+            old_size = os.path.getsize(f_in)
+            out_dir = os.path.dirname(f_out)
+            if out_dir and not os.path.exists(out_dir):
+                os.makedirs(out_dir)
+                
+            clean_file(f_in, f_out)
+            new_size = os.path.getsize(f_out)
+            print(f"Processed {os.path.basename(f_in)}: {old_size//1024}KB -> {new_size//1024}KB")
         except Exception as e:
-            print(f"Failed {os.path.basename(f)}: {e}")
+            print(f"Failed {os.path.basename(f_in)}: {e}")
