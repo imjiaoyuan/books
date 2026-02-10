@@ -20,7 +20,6 @@ def run_editor():
     new_title = input("Enter new title (Enter to skip): ").strip()
     
     if new_title:
-        # 强力清除旧标题元数据，防止重复或读取旧值
         if 'http://purl.org/dc/elements/1.1/' in book.metadata:
             book.metadata['http://purl.org/dc/elements/1.1/']['title'] = []
         book.set_title(new_title)
