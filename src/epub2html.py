@@ -2,6 +2,7 @@ import os
 import sys
 import argparse
 import logging
+import warnings
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple
 from urllib.parse import urldefrag
@@ -9,16 +10,13 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 import ebooklib
 from ebooklib import epub
 from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
-import warnings
-import re
+
+from utils import natural_sort_key, read_epub_safe, get_epub_title
 
 warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 
 logger = logging.getLogger(__name__)
 BASE_TPL_DIR = Path(__file__).parent.parent / 'templates'
-
-def natural_sort_key(s: str) -> list:
-    return [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', s)]
 
 
 def load_tpl(name: str) -> str:
@@ -36,12 +34,8 @@ def create_master_index(output_dir: Path, books: List[Dict[str, str]]) -> None:
 
 
 def convert_ebook(epub_path: Path, book_root: Path) -> str:
-    book = epub.read_epub(str(epub_path))
-    try:
-        title = book.get_metadata('DC', 'title')[0][0]
-    except (IndexError, KeyError) as e:
-        logger.warning(f"Failed to get title from {epub_path.name}: {e}")
-        title = epub_path.stem
+    book = read_epub_safe(epub_path)
+    title = get_epub_title(book, fallback=epub_path.stem)
 
     chapters_dir = book_root / 'chapters'
     chapters_dir.mkdir(parents=True, exist_ok=True)

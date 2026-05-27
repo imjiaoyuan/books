@@ -1,11 +1,12 @@
 import sys
-import os
 import tempfile
 import argparse
 import logging
 from pathlib import Path
 from typing import List
 from ebooklib import epub
+
+from utils import read_epub_safe, get_epub_title
 
 logger = logging.getLogger(__name__)
 
@@ -22,8 +23,7 @@ def collect_links(items: list, all_links: List[epub.Link]) -> None:
 
 
 def edit_title(book: epub.EpubBook) -> bool:
-    titles = book.get_metadata('DC', 'title')
-    current_title = titles[0][0] if titles else "Unknown"
+    current_title = get_epub_title(book)
     print(f"\n[Title Editing]\nCurrent title: {current_title}")
     new_title = input("Enter new title (Enter to skip): ").strip()
 
@@ -83,16 +83,11 @@ def save_epub(book: epub.EpubBook, save_path: Path) -> None:
 
 
 def run_editor(epub_path: Path) -> None:
-    if not epub_path.exists():
-        logger.error(f"File not found: {epub_path}")
-        sys.exit(1)
-
-    if not epub_path.is_file():
-        logger.error(f"Not a file: {epub_path}")
-        sys.exit(1)
-
     try:
-        book = epub.read_epub(str(epub_path))
+        book = read_epub_safe(epub_path)
+    except (FileNotFoundError, ValueError) as e:
+        logger.error(str(e))
+        sys.exit(1)
     except Exception as e:
         logger.error(f"Failed to read EPUB: {e}")
         sys.exit(1)

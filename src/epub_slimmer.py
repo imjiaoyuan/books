@@ -1,6 +1,4 @@
-import os
 import sys
-import glob
 import re
 import argparse
 import logging
@@ -11,11 +9,13 @@ from ebooklib import epub
 import ebooklib
 from bs4 import BeautifulSoup
 
+from utils import read_epub_safe
+
 logger = logging.getLogger(__name__)
 
 
 def clean_file(file_path: Path, output_path: Path) -> Tuple[int, int]:
-    book = epub.read_epub(str(file_path))
+    book = read_epub_safe(file_path)
     new_items = []
 
     for item in book.get_items():

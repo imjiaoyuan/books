@@ -1,9 +1,7 @@
 import logging
 import re
-from typing import Optional
 from pathlib import Path
 from ebooklib import epub
-from bs4 import BeautifulSoup
 
 
 def setup_logger(name: str, level: int = logging.INFO) -> logging.Logger:
