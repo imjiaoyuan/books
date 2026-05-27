@@ -6,8 +6,9 @@ on:
       - main
     paths:
       - 'epub/**.epub'
-      - 'epub2html.py'
+      - 'src/**'
       - 'templates/**'
+      - '.github/workflows/deploy.yml'
 
 permissions:
   contents: write
@@ -27,14 +28,14 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ebooklib beautifulsoup4 lxml
+          pip install -r requirements.txt
 
       - name: Create output directory
-        run: mkdir public
+        run: mkdir -p public
 
       - name: Run conversion script
         run: |
-          python src/epub2html.py ./epub ./public
+          python src/epub2html.py -i ./epub -o ./public
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
