@@ -18,15 +18,23 @@ python src/epub2html.py -i ./epub -o ./public
 # Parallel conversion (e.g., 4 workers)
 python src/epub2html.py -i ./epub -o ./public -j 4
 
-# Slim EPUBs (strip images, fonts, media)
+# Slim EPUBs — directory mode (strip images, fonts, media from all EPUBs)
 python src/epub_slimmer.py -i ./epub -o ./slimmed_epub -j 4
+
+# Slim EPUBs — single file mode
+python src/epub_slimmer.py -i epub/some-book.epub -o slimmed.epub
 
 # Edit EPUB metadata/chapter titles interactively
 python src/edit_epub.py -i epub/some-book.epub
 
-# Scan EPUB structure (headings, TOC depth, metadata, issues)
-python src/epub_check.py epub/some-book.epub         # human-readable
-python src/epub_check.py epub/ --json                 # JSON, whole directory
+# Scan EPUB structure — single file (human-readable)
+python src/epub_check.py epub/some-book.epub
+
+# Scan EPUB structure — multiple specific files
+python src/epub_check.py epub/book1.epub epub/book2.epub
+
+# Scan EPUB structure — whole directory as JSON
+python src/epub_check.py epub/ --json
 ```
 
 There are no tests in this project. The scripts are verified by running them directly.
@@ -43,16 +51,16 @@ All scripts depend on `utils.py` for:
 
 ### Core conversion pipeline (`src/epub2html.py` → `templates/`)
 
-The main tool. Uses `ProcessPoolExecutor` for parallelism (serial path when `-j 1` or a single file).
+The main tool. Uses `ProcessPoolExecutor` for parallelism, with a serial fallback when `-j 1` or only one EPUB is processed (both `epub_slimmer.py` and `epub2html.py` share this pattern: serial under 1, `ProcessPoolExecutor` otherwise, capped at `min(jobs, len(tasks))`).
 
 1. Reads all `.epub` files from the input directory
 2. For each EPUB: extracts document items, sorts by natural key, maps old→new filenames
 3. Strips `<img>`, `<image>`, `<svg>`, `<style>`, `<link>`, `<script>` tags and all non-href/non-id attributes from chapter HTML
 4. Injects prev/next/contents/bookshelf navigation into each chapter page using simple `{placeholder}` string replacement (not Jinja2)
 5. Builds a TOC page by walking `book.toc` (recursive `Link`/tuple structure) and resolving hrefs to the renamed chapter files
-6. Generates `create_master_index()` — a top-level bookshelf page listing all converted books
+6. Generates `create_master_index()` — a top-level bookshelf page listing all converted books, sorted by title
 
-**Template system**: Three HTML templates in `templates/` using `{title}`, `{content}`, `{nav}`, `{toc_content}` placeholders substituted via `str.replace()`. The output is a three-level hierarchy:
+**Template system**: Three HTML templates in `templates/` using `{title}`, `{content}`, `{nav}`, `{toc_content}` placeholders substituted via `str.replace()`. Templates hardcode `lang="zh-CN"`. The output is a three-level hierarchy:
 ```
 public/
 ├── index.html              (bookshelf — lists all books)
@@ -67,15 +75,15 @@ public/
 
 ### EPUB slimdown (`src/epub_slimmer.py`)
 
-Removes media items (images, fonts, audio, video) from EPUB files, strips `<img>`, `<image>`, `<svg>`, `<video>`, `<audio>`, `<iframe>` tags from documents, and removes `@font-face` blocks from CSS.
+Removes media items (images, fonts, audio, video) from EPUB files, strips `<img>`, `<image>`, `<svg>`, `<video>`, `<audio>`, `<iframe>` tags from documents, and removes `@font-face` blocks from CSS. Supports both directory→directory and file→file modes.
 
 ### Interactive editor (`src/edit_epub.py`)
 
-Interactive CLI for editing EPUB metadata (title) and TOC chapter titles. Saves atomically via a temp-file-then-rename pattern.
+Interactive CLI for editing EPUB metadata (title) and TOC chapter titles. Saves atomically via a temp-file-then-rename pattern. **Important**: only modifies `book.toc` (navigation links), not `book.spine` (reading order). Chapter title changes affect the generated TOC page but do not reorder chapters.
 
 ### Diagnostics (`src/epub_check.py`)
 
-Read-only scanner. Reports per-EPUB: file size, metadata completeness, TOC depth/preview, spine count, content-type breakdown (docs/images/styles/fonts), heading distribution (H1/H2/H3 counts and samples), and flags issues (missing author, missing language, no documents).
+Read-only scanner. Reports per-EPUB: file size, metadata completeness, TOC depth/preview, spine count, content-type breakdown (docs/images/styles/fonts), heading distribution (H1/H2/H3 counts and samples), and flags issues (missing author, missing language, no documents). Accepts one or more file paths or a directory. Use `--json` for machine-readable output.
 
 ### CI/CD (`.github/workflows/deploy.yml`)
 
@@ -93,3 +101,9 @@ All `*.epub` files are tracked via Git LFS (`.gitattributes`). After cloning, ru
 - `ebooklib` — EPUB read/write operations
 - `beautifulsoup4` + `lxml` — HTML parsing and manipulation
 - No web framework, no database, no asset pipeline — pure static site generation
+
+### Repository notes
+
+- `public/` is gitignored (it's the generated output)
+- `index.html` at the repo root is a legacy manual file, not part of the conversion pipeline
+- A `.venv/` at the repo root is gitignored for local development
