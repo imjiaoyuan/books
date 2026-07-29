@@ -1,30 +1,35 @@
 My Bookshelf
 
-Convert from epub file using Python.
+Convert EPUB files to a static HTML bookshelf with inter-chapter navigation, deployed to GitHub Pages.
 
 ## Tools
 
-This project contains three EPUB processing tools:
+- **epub2html.py** — Convert EPUB files to HTML bookshelf with navigation
+- **epub_slimmer.py** — Strip images, fonts, and media from EPUBs
+- **epub_cleanup.py** — Remove ads and fix metadata (for pirated EPUBs)
+- **epub_check.py** — Scan EPUB structure, metadata, and content
+- **edit_epub.py** — Interactive editor for EPUB title and chapter names
 
-- **epub2html.py** - Convert EPUB files to HTML bookshelf with navigation
-- **edit_epub.py** - Interactive editor for EPUB metadata and chapter titles
-- **epub_slimmer.py** - Slim down EPUB files by removing media resources
-
-## Installation
-
-```bash
-pip install -r requirements.txt
-```
-
-## Usage
+## Quick start
 
 ```bash
-# Convert EPUB to HTML
-python src/epub2html.py -i <input_dir> -o <output_dir> [-j <jobs>]
+# Install dependencies
+uv pip install -r requirements.txt
 
-# Edit EPUB metadata
-python src/edit_epub.py -i <epub_file>
+# Convert EPUBs to HTML
+uv run src/epub2html.py -i ./epub -o ./public
 
-# Slim EPUB files
-python src/epub_slimmer.py -i <input_path> -o <output_path> [-j <jobs>]
+# Check an EPUB
+uv run src/epub_check.py epub/book.epub
+
+# Slim an EPUB
+uv run src/epub_slimmer.py -i epub/book.epub -o epub/book.epub
+
+# Clean up ads + fix language
+uv run src/epub_cleanup.py -i epub/book.epub -o epub/book.epub --lang zh-CN
+
+# Edit title/chapter names interactively
+uv run src/edit_epub.py -i epub/book.epub
 ```
+
+See [CLAUDE.md](CLAUDE.md) for the full workflow when adding new books.

@@ -8,7 +8,8 @@ A personal EPUB-to-HTML bookshelf converter. Takes EPUB files from `epub/`, conv
 
 ## Environment
 
-Python 3.11 via uv. Dependencies in `requirements.txt`:
+Python 3.11 managed by [uv](https://docs.astral.sh/uv/). All scripts run via `uv run` which handles the virtualenv automatically.
+
 ```bash
 uv pip install -r requirements.txt
 ```
@@ -29,6 +30,7 @@ uv run src/epub_check.py epub/book.epub [--json]
 
 # Clean up ads + fix metadata (pirated EPUBs)
 uv run src/epub_cleanup.py -i epub/book.epub -o epub/book.epub --lang zh-CN
+uv run src/epub_cleanup.py -i epub/book.epub -o epub/book.epub --lang zh-CN --extra-keywords "广告词1,广告词2"
 
 # Edit title/chapter names interactively
 uv run src/edit_epub.py -i epub/book.epub
@@ -43,7 +45,7 @@ There are no tests — scripts are verified by running them directly.
 - `read_epub_safe(path)` — validates and opens EPUB via `ebooklib`
 - `get_epub_title(book, fallback)` — extracts DC title metadata
 - `natural_sort_key(s)` — natural sort for chapter filenames ("ch2" < "ch10")
-- `setup_logger(name, level)` — stream-handler logger factory
+- `setup_logger(name, level)` — stream-handler logger factory (only used by `epub_check.py`; other scripts use `logging.basicConfig` directly)
 
 ### Core pipeline (`src/epub2html.py` → `templates/`)
 
@@ -56,7 +58,7 @@ Serial for 1 EPUB, `ProcessPoolExecutor` otherwise (capped at `min(jobs, len(tas
 5. Builds TOC by walking `book.toc` (recursive `Link`/tuple), resolving hrefs to renamed files
 6. Generates bookshelf at `public/index.html` listing all books sorted by title
 
-**Templates**: Three HTML files in `templates/` (`layout_chapter.html`, `layout_toc.html`, `layout_shelf.html`), hardcoded `lang="zh-CN"`.
+**Templates**: Three HTML files in `templates/` (`layout_chapter.html`, `layout_toc.html`, `layout_shelf.html`). Use `{title}`, `{content}`/`{toc_content}`, `{nav}` placeholders (string replacement, no Jinja2). Hardcoded `lang="zh-CN"` — change these if adding non-Chinese books.
 
 **Output structure**:
 ```
@@ -70,7 +72,7 @@ public/
             └── ...
 ```
 
-Both `epub2html.py` and `epub_slimmer.py` share the same concurrency pattern.
+Both `epub2html.py` and `epub_slimmer.py` share the same concurrency pattern: serial when `len(tasks) == 1`, otherwise `ProcessPoolExecutor` capped at `min(jobs, len(tasks))`.
 
 ### EPUB slimdown (`src/epub_slimmer.py`)
 
@@ -187,3 +189,4 @@ All `*.epub` files are Git LFS-tracked (`.gitattributes`). `git lfs pull` after 
 - `public/` is gitignored (generated output)
 - `index.html` at repo root is legacy, not part of the pipeline
 - `.venv/` is gitignored
+- EPUB naming convention: Chinese-origin books use Title-Case-With-Hyphens (`The-Lost-Tomb.epub`), English-origin books use lowercase-with-hyphens (`pride-and-prejudice.epub`). The filename stem becomes the output directory name, so get it right before committing.
