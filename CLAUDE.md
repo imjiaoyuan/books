@@ -86,6 +86,16 @@ For pirated EPUBs: removes ad elements matching `AD_KEYWORDS` (笔趣阁, sobqg,
 
 Read-only scanner: file size, metadata completeness, TOC depth/preview, spine count, content-type breakdown (docs/images/styles/fonts), heading distribution (H1/H2/H3 counts/samples). Flags: missing author, missing language, no documents. Accepts paths or directory; `--json` for machine output.
 
+### Content check (`src/epub_content_check.py`)
+
+Scans chapter body text for ad keywords, garbled/encoding artifacts, and suspiciously short chapters. Use `--extra-keywords` for source-specific ad text. Use after `epub_check.py` to verify content quality before committing.
+
+```bash
+uv run src/epub_content_check.py epub/book.epub
+uv run src/epub_content_check.py epub/book.epub --extra-keywords "广告1,广告2"
+uv run src/epub_content_check.py epub/ --json
+```
+
 ### Interactive editor (`src/edit_epub.py`)
 
 Edit EPUB title and TOC chapter titles. Saves atomically (temp-file-then-rename). Only touches `book.toc` (nav links), not `book.spine` (reading order).
