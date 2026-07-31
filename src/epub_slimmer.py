@@ -14,12 +14,35 @@ from utils import read_epub_safe
 logger = logging.getLogger(__name__)
 
 
+def _is_cover_page(book, item) -> bool:
+    cover_id = None
+    for meta in book.get_metadata('OPF', 'cover'):
+        cover_id = meta[0]
+        break
+    if cover_id and item.id == cover_id:
+        return True
+    name = (item.get_name() or '').lower()
+    if 'cover' in name:
+        return True
+    try:
+        soup = BeautifulSoup(item.get_content().decode('utf-8', 'ignore'), 'lxml')
+        title_tag = soup.find('title')
+        if title_tag and title_tag.get_text(strip=True) == '封面':
+            return True
+    except Exception:
+        pass
+    return False
+
+
 def clean_file(file_path: Path, output_path: Path) -> Tuple[int, int]:
     book = read_epub_safe(file_path)
     new_items = []
 
     for item in book.get_items():
         if item.get_type() in [ebooklib.ITEM_IMAGE, ebooklib.ITEM_FONT, ebooklib.ITEM_VIDEO, ebooklib.ITEM_AUDIO]:
+            continue
+
+        if _is_cover_page(book, item):
             continue
 
         if item.get_type() == ebooklib.ITEM_DOCUMENT:
@@ -42,6 +65,11 @@ def clean_file(file_path: Path, output_path: Path) -> Tuple[int, int]:
         new_items.append(item)
 
     book.items = new_items
+
+    old_meta = book.get_metadata('OPF', 'cover')
+    if old_meta:
+        book.clear_metadata('OPF', 'cover')
+
     old_size = file_path.stat().st_size
     epub.write_epub(str(output_path), book)
     new_size = output_path.stat().st_size
