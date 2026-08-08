@@ -9,9 +9,13 @@
     <div class="container">
         <div class="header">
             <h1>{title}</h1>
-            <div><a href="../index.html">Back </a></div>
+            <div>
+                <a href="../index.html">Back </a>
+                <button id="dl-offline" data-folder="{book_folder}" data-total="{chapter_total}">离线下载整本</button>
+            </div>
         </div>
         <div class="toc-list">{toc_content}</div>
     </div>
+    <script src="../../book.js"></script>
 </body>
 </html>

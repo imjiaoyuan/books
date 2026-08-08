@@ -1,5 +1,6 @@
 import os
 import sys
+import subprocess
 import argparse
 import logging
 import warnings
@@ -22,6 +23,30 @@ BASE_TPL_DIR = Path(__file__).parent.parent / 'templates'
 def load_tpl(name: str) -> str:
     with open(BASE_TPL_DIR / name, 'r', encoding='utf-8') as f:
         return f.read()
+
+
+def get_cache_version() -> str:
+    """Git short SHA stamped into sw.js/book.js to bust the SW cache on deploy."""
+    try:
+        out = subprocess.run(
+            ['git', 'rev-parse', '--short', 'HEAD'],
+            capture_output=True, text=True, timeout=5,
+        )
+        if out.returncode == 0 and out.stdout.strip():
+            return out.stdout.strip()
+    except Exception:
+        pass
+    return 'dev'
+
+
+def write_static_assets(output_dir: Path, version: str) -> None:
+    """Emit sw.js + book.js at the site root with __CACHE_VERSION__ substituted."""
+    for name in ('sw.js', 'book.js'):
+        src = BASE_TPL_DIR / name
+        if not src.exists():
+            continue
+        text = src.read_text(encoding='utf-8').replace('__CACHE_VERSION__', version)
+        (output_dir / name).write_text(text, encoding='utf-8')
 
 
 def create_master_index(output_dir: Path, books: List[Dict[str, str]]) -> None:
@@ -92,7 +117,12 @@ def convert_ebook(epub_path: Path, book_root: Path) -> str:
 
     walk_toc(book.toc)
     out_toc = book_root / 'index.html'
-    final_toc = load_tpl('layout_toc.html').replace('{title}', title).replace('{toc_content}', "".join(toc_list)).replace('../index.html', '../../index.html')
+    final_toc = (load_tpl('layout_toc.html')
+                 .replace('{title}', title)
+                 .replace('{toc_content}', "".join(toc_list))
+                 .replace('{book_folder}', book_root.name)
+                 .replace('{chapter_total}', str(len(sorted_items)))
+                 .replace('../index.html', '../../index.html'))
     with open(out_toc, 'w', encoding='utf-8') as f:
         f.write(final_toc)
     return title
@@ -130,6 +160,8 @@ def main() -> None:
 
     books_dir = out_dir / 'books'
     books_dir.mkdir(parents=True, exist_ok=True)
+
+    write_static_assets(out_dir, get_cache_version())
 
     epub_files = sorted(in_dir.glob('*.epub'))
     if not epub_files:
