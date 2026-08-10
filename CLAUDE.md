@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-A personal EPUB-to-HTML bookshelf converter. Takes EPUB files from `epub/`, converts to static HTML with inter-chapter navigation, deploys to GitHub Pages.
+A personal EPUB-to-HTML bookshelf converter. Takes EPUB files from `epub/`, converts them to static HTML with inter-chapter navigation and offline reading (service worker), and deploys to GitHub Pages.
 
 ## Environment
 
-Python 3.11 managed by [uv](https://docs.astral.sh/uv/). All scripts run via `uv run` which handles the virtualenv automatically.
+Python 3.11 managed by [uv](https://docs.astral.sh/uv/). All scripts run via `uv run`, which handles the virtualenv automatically.
 
 ```bash
 uv pip install -r requirements.txt
@@ -19,21 +19,26 @@ uv pip install -r requirements.txt
 All scripts run with `uv run`:
 
 ```bash
-# Convert all EPUBs to HTML
+# Convert all EPUBs to HTML (emits public/index.html, books/, sw.js, book.js)
 uv run src/epub2html.py -i ./epub -o ./public [-j N]
 
-# Slim EPUBs (strip images/fonts/media)
+# Slim EPUBs (strip images/fonts/media + cover pages)
 uv run src/epub_slimmer.py -i epub/book.epub -o epub/book.epub
 
 # Check EPUB structure/metadata
 uv run src/epub_check.py epub/book.epub [--json]
 
+# Content-quality scan (ads, garbled text, short chapters)
+uv run src/epub_content_check.py epub/book.epub [--extra-keywords "词1,词2"]
+
 # Clean up ads + fix metadata (pirated EPUBs)
 uv run src/epub_cleanup.py -i epub/book.epub -o epub/book.epub --lang zh-CN
-uv run src/epub_cleanup.py -i epub/book.epub -o epub/book.epub --lang zh-CN --extra-keywords "广告词1,广告词2"
 
 # Edit title/chapter names interactively
 uv run src/edit_epub.py -i epub/book.epub
+
+# Split a collection EPUB into individual books (config-driven; see below)
+uv run src/epub_splitter.py epub/Collection.epub -o /tmp/split-epubs
 ```
 
 There are no tests — scripts are verified by running them directly.
@@ -42,8 +47,8 @@ There are no tests — scripts are verified by running them directly.
 
 ### Shared foundation (`src/utils.py`)
 
-- `read_epub_safe(path)` — validates and opens EPUB via `ebooklib`
-- `get_epub_title(book, fallback)` — extracts DC title metadata
+- `read_epub_safe(path)` — validates and opens an EPUB via `ebooklib`
+- `get_epub_title(book, fallback)` — extracts the DC title metadata
 - `natural_sort_key(s)` — natural sort for chapter filenames ("ch2" < "ch10")
 - `setup_logger(name, level)` — stream-handler logger factory (only used by `epub_check.py`; other scripts use `logging.basicConfig` directly)
 
@@ -51,22 +56,22 @@ There are no tests — scripts are verified by running them directly.
 
 Serial for 1 EPUB, `ProcessPoolExecutor` otherwise (capped at `min(jobs, len(tasks))`).
 
-1. Reads `.epub` files from input dir
-2. Extracts document items, sorts by natural key, remaps filenames → `1.html`, `2.html`...
-3. Strips `<img>`, `<image>`, `<svg>`, `<style>`, `<link>`, `<script>` and all non-href/non-id attributes
-4. Injects prev/next/contents/bookshelf nav via `{placeholder}` string replacement (no Jinja2)
-5. Builds TOC by walking `book.toc` (recursive `Link`/tuple), resolving hrefs to renamed files
-6. Generates bookshelf at `public/index.html` listing all books sorted by title
-
-**Templates**: Three HTML files in `templates/` (`layout_chapter.html`, `layout_toc.html`, `layout_shelf.html`). Use `{title}`, `{content}`/`{toc_content}`, `{nav}` placeholders (string replacement, no Jinja2). Hardcoded `lang="zh-CN"` — change these if adding non-Chinese books.
+1. Stamps `__CACHE_VERSION__` (git short SHA, or `dev`) into `sw.js`/`book.js` and writes them to the site root.
+2. Reads `.epub` files from the input dir.
+3. Extracts document items, sorts by natural key, remaps filenames → `1.html`, `2.html`...
+4. Strips `<img>`, `<image>`, `<svg>`, `<style>`, `<link>`, `<script>` and all non-href/non-id attributes.
+5. Injects prev/next/contents/bookshelf nav via `{placeholder}` string replacement (no Jinja2).
+6. Builds TOC by walking `book.toc` (recursive `Link`/tuple), resolving hrefs to renamed files.
+7. Generates bookshelf at `public/index.html` listing all books sorted by title.
 
 **Output structure**:
 ```
 public/
 ├── index.html                  (bookshelf — all books)
+├── sw.js, book.js              (offline-caching assets, version-stamped)
 └── books/
     └── <BookTitle>/
-        ├── index.html          (book TOC)
+        ├── index.html          (book TOC + "离线下载整本" button)
         └── chapters/
             ├── 1.html
             └── ...
@@ -74,9 +79,25 @@ public/
 
 Both `epub2html.py` and `epub_slimmer.py` share the same concurrency pattern: serial when `len(tasks) == 1`, otherwise `ProcessPoolExecutor` capped at `min(jobs, len(tasks))`.
 
+### Offline reading (`templates/sw.js` + `templates/book.js`)
+
+- `book.js` registers `sw.js` (resolving the site root from its own script URL, so it works under any subpath) and wires the `#dl-offline` button on each book's TOC page to pre-cache all chapters for that book.
+- `sw.js` serves same-origin GETs stale-while-revalidate, and runs a sliding-window prefetch: opening chapter N caches N+1..N+20 (stops at first 404 = end of book; skips on metered/save-data connections). On cache miss while offline, returns a `503` fallback page.
+- `__CACHE_VERSION__` is the cache-busting key. It's substituted by `epub2html.py`'s `write_static_assets()`/`get_cache_version()`, so editing these files requires no manual version bump.
+
 ### EPUB slimdown (`src/epub_slimmer.py`)
 
-Removes: image/font/audio/video items, `<img>`, `<image>`, `<svg>`, `<video>`, `<audio>`, `<iframe>` tags, `@font-face` CSS blocks. Single-file or directory mode.
+Removes image/font/audio/video items, cover pages (detected by OPF `cover` meta, filename, or `<title>封面</title>`), `<img>`/`<image>`/`<svg>`/`<video>`/`<audio>`/`<iframe>` tags, `@font-face` CSS blocks, and clears the OPF `cover` metadata. Single-file or directory mode.
+
+### Collection splitter (`src/epub_splitter.py`)
+
+Splits a multi-book collection EPUB into individual EPUBs. **Config-driven, not general-purpose**: only files named in the `SPLIT_CONFIG` dict at the top of the script are processed. To split a new collection, add an entry there with a `mode`:
+
+- `structured` — one output per top-level TOC group that has children
+- `flat` — one output per top-level TOC entry (skips 书名页/版权页/目录/封面)
+- `markers` — one output per spine range between the given `markers` TOC titles
+
+Takes a single EPUB positional arg; `-o` defaults to `/tmp/split-epubs`.
 
 ### EPUB cleanup (`src/epub_cleanup.py`)
 
@@ -88,13 +109,7 @@ Read-only scanner: file size, metadata completeness, TOC depth/preview, spine co
 
 ### Content check (`src/epub_content_check.py`)
 
-Scans chapter body text for ad keywords, garbled/encoding artifacts, and suspiciously short chapters. Use `--extra-keywords` for source-specific ad text. Use after `epub_check.py` to verify content quality before committing.
-
-```bash
-uv run src/epub_content_check.py epub/book.epub
-uv run src/epub_content_check.py epub/book.epub --extra-keywords "广告1,广告2"
-uv run src/epub_content_check.py epub/ --json
-```
+Scans chapter body text for ad keywords, garbled/encoding artifacts, and suspiciously short chapters. Use `--extra-keywords` for source-specific ad text. Run after `epub_check.py` to verify content quality before committing.
 
 ### Interactive editor (`src/edit_epub.py`)
 
@@ -104,7 +119,7 @@ Edit EPUB title and TOC chapter titles. Saves atomically (temp-file-then-rename)
 
 ### Step 1 — Extract (if source is .zip)
 
-Many Chinese sites ship epub inside a zip. Filenames are often GBK-encoded, so `unzip -l` shows garbled text. Use Python to decode and extract:
+Many Chinese sites ship an epub inside a zip with GBK-encoded filenames, so `unzip -l` shows garbled text. Use Python to decode and extract:
 
 ```bash
 uv run python -c "
@@ -119,7 +134,7 @@ with zipfile.ZipFile('file.zip') as zf:
 "
 ```
 
-If source is already `.epub`, skip to step 2.
+If the source is already `.epub`, skip to step 2.
 
 ### Step 2 — Copy & rename
 
@@ -145,7 +160,7 @@ Check output for:
 
 ### Step 4 — Cleanup
 
-Only if inspect step found issues. At minimum, always fix language for Chinese books:
+Only if the inspect step found issues. At minimum, always fix language for Chinese books:
 
 ```bash
 uv run src/epub_cleanup.py -i epub/<Name>.epub -o epub/<Name>.epub --lang zh-CN
@@ -161,7 +176,7 @@ If the book is from a clean source, run with `--no-ad-removal --lang zh-CN`.
 
 ### Step 5 — Slim
 
-Strip images/fonts/media. Slim to temp then copy back (slimmer doesn't overwrite in-place):
+Strip images/fonts/media. Slim to a temp path then copy back (the slimmer overwrites `-o`, but using a temp avoids losing the input if something fails):
 
 ```bash
 uv run src/epub_slimmer.py -i epub/<Name>.epub -o /tmp/slimmed.epub
@@ -185,18 +200,19 @@ git add epub/<Name>.epub && git commit -m "update" && git push
 
 ## CI/CD (`.github/workflows/deploy.yml`)
 
-On push to `main` (trigger: `epub/**`, `src/**`, `templates/**`, workflow itself):
+On push to `main` (trigger: `epub/**.epub`, `src/**`, `templates/**`, workflow itself):
 - Checkout with LFS, install Python 3.11 + deps
-- `epub2html.py -i ./epub -o ./public`
-- Deploy `public/` to GitHub Pages via `peaceiris/actions-gh-pages`
+- `python src/epub2html.py -i ./epub -o ./public`
+- Deploy `public/` to GitHub Pages via `peaceiris/actions-gh-pages` (`force_orphan: true`)
 
 ## Git LFS
 
-All `*.epub` files are Git LFS-tracked (`.gitattributes`). `git lfs pull` after clone.
+All `*.epub` files are Git LFS-tracked (`.gitattributes`). Run `git lfs pull` after clone.
 
 ## Notes
 
 - `public/` is gitignored (generated output)
 - `index.html` at repo root is legacy, not part of the pipeline
-- `.venv/` is gitignored
-- EPUB naming convention: Chinese-origin books use Title-Case-With-Hyphens (`The-Lost-Tomb.epub`), English-origin books use lowercase-with-hyphens (`pride-and-prejudice.epub`). The filename stem becomes the output directory name, so get it right before committing.
+- `.venv/` and `src/__pycache__/` are gitignored
+- Templates hardcode `lang="zh-CN"` — change these if adding non-Chinese books
+- The filename stem of each EPUB becomes its output directory name, so get it right before committing
