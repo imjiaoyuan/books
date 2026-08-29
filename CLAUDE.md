@@ -8,37 +8,38 @@ A personal EPUB-to-HTML bookshelf converter. Takes EPUB files from `epub/`, conv
 
 ## Environment
 
-Python 3.11 managed by [uv](https://docs.astral.sh/uv/). All scripts run via `uv run`, which handles the virtualenv automatically.
+Python venv at `.venv/` (system python3). `uv` is no longer installed, so run scripts with `.venv/bin/python` directly.
 
 ```bash
-uv pip install -r requirements.txt
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
 ```
 
 ## Commands
 
-All scripts run with `uv run`:
+All scripts run with `.venv/bin/python`:
 
 ```bash
 # Convert all EPUBs to HTML (emits public/index.html, books/, sw.js, book.js)
-uv run src/epub2html.py -i ./epub -o ./public [-j N]
+.venv/bin/python src/epub2html.py -i ./epub -o ./public [-j N]
 
 # Slim EPUBs (strip images/fonts/media + cover pages)
-uv run src/epub_slimmer.py -i epub/book.epub -o epub/book.epub
+.venv/bin/python src/epub_slimmer.py -i epub/book.epub -o epub/book.epub
 
 # Check EPUB structure/metadata
-uv run src/epub_check.py epub/book.epub [--json]
+.venv/bin/python src/epub_check.py epub/book.epub [--json]
 
 # Content-quality scan (ads, garbled text, short chapters)
-uv run src/epub_content_check.py epub/book.epub [--extra-keywords "词1,词2"]
+.venv/bin/python src/epub_content_check.py epub/book.epub [--extra-keywords "词1,词2"]
 
 # Clean up ads + fix metadata (pirated EPUBs)
-uv run src/epub_cleanup.py -i epub/book.epub -o epub/book.epub --lang zh-CN
+.venv/bin/python src/epub_cleanup.py -i epub/book.epub -o epub/book.epub --lang zh-CN
 
 # Edit title/chapter names interactively
-uv run src/edit_epub.py -i epub/book.epub
+.venv/bin/python src/edit_epub.py -i epub/book.epub
 
 # Split a collection EPUB into individual books (config-driven; see below)
-uv run src/epub_splitter.py epub/Collection.epub -o /tmp/split-epubs
+.venv/bin/python src/epub_splitter.py epub/Collection.epub -o /tmp/split-epubs
 ```
 
 There are no tests — scripts are verified by running them directly.
@@ -52,6 +53,8 @@ There are no tests — scripts are verified by running them directly.
 - `natural_sort_key(s)` — natural sort for chapter filenames ("ch2" < "ch10")
 - `setup_logger(name, level)` — stream-handler logger factory (only used by `epub_check.py`; other scripts use `logging.basicConfig` directly)
 
+Scripts import siblings flat (`from utils import ...`), not `from src.utils` — this works because `.venv/bin/python src/foo.py` puts `src/` itself on `sys.path`. There is no package structure; don't introduce one.
+
 ### Core pipeline (`src/epub2html.py` → `templates/`)
 
 Serial for 1 EPUB, `ProcessPoolExecutor` otherwise (capped at `min(jobs, len(tasks))`).
@@ -59,7 +62,7 @@ Serial for 1 EPUB, `ProcessPoolExecutor` otherwise (capped at `min(jobs, len(tas
 1. Stamps `__CACHE_VERSION__` (git short SHA, or `dev`) into `sw.js`/`book.js` and writes them to the site root.
 2. Reads `.epub` files from the input dir.
 3. Extracts document items, sorts by natural key, remaps filenames → `1.html`, `2.html`...
-4. Strips `<img>`, `<image>`, `<svg>`, `<style>`, `<link>`, `<script>` and all non-href/non-id attributes.
+4. Strips `<img>`, `<image>`, `<svg>`, `<style>`, `<link>`, `<script>` and all non-href/non-id attributes, then remaps internal `<a href>`s to the renamed chapter files (books with an in-content TOC link across chapters by original filename, e.g. the-qin-empire).
 5. Injects prev/next/contents/bookshelf nav via `{placeholder}` string replacement (no Jinja2).
 6. Builds TOC by walking `book.toc` (recursive `Link`/tuple), resolving hrefs to renamed files.
 7. Generates bookshelf at `public/index.html` listing all books sorted by title.
@@ -71,7 +74,7 @@ public/
 ├── sw.js, book.js              (offline-caching assets, version-stamped)
 └── books/
     └── <BookTitle>/
-        ├── index.html          (book TOC + "离线下载整本" button)
+        ├── index.html          (book TOC + "Save Offline" button)
         └── chapters/
             ├── 1.html
             └── ...
@@ -81,8 +84,10 @@ Both `epub2html.py` and `epub_slimmer.py` share the same concurrency pattern: se
 
 ### Offline reading (`templates/sw.js` + `templates/book.js`)
 
-- `book.js` registers `sw.js` (resolving the site root from its own script URL, so it works under any subpath) and wires the `#dl-offline` button on each book's TOC page to pre-cache all chapters for that book.
+- `book.js` registers `sw.js` (resolving the site root from its own script URL, so it works under any subpath) and wires the `#dl-offline` button on each book's TOC page to pre-cache all chapters for that book. The button lives in `layout_toc.html` and carries `data-folder`/`data-total` attributes that `book.js` reads.
 - `sw.js` serves same-origin GETs stale-while-revalidate, and runs a sliding-window prefetch: opening chapter N caches N+1..N+20 (stops at first 404 = end of book; skips on metered/save-data connections). On cache miss while offline, returns a `503` fallback page.
+
+These pieces share a load-bearing invariant: chapters are sequential `1.html..N.html` files under `books/<Folder>/chapters/`. `epub2html.py`'s renaming, `sw.js`'s URL regex, and `book.js`'s download loop all assume it — preserve the numbering scheme when changing any of them.
 - `__CACHE_VERSION__` is the cache-busting key. It's substituted by `epub2html.py`'s `write_static_assets()`/`get_cache_version()`, so editing these files requires no manual version bump.
 
 ### EPUB slimdown (`src/epub_slimmer.py`)
@@ -122,7 +127,7 @@ Edit EPUB title and TOC chapter titles. Saves atomically (temp-file-then-rename)
 Many Chinese sites ship an epub inside a zip with GBK-encoded filenames, so `unzip -l` shows garbled text. Use Python to decode and extract:
 
 ```bash
-uv run python -c "
+.venv/bin/python -c "
 import zipfile
 with zipfile.ZipFile('file.zip') as zf:
     for info in zf.infolist():
@@ -149,7 +154,7 @@ cp /path/to/source.epub epub/<Name>.epub
 ### Step 3 — Inspect
 
 ```bash
-uv run src/epub_check.py epub/<Name>.epub
+.venv/bin/python src/epub_check.py epub/<Name>.epub
 ```
 
 Check output for:
@@ -163,12 +168,12 @@ Check output for:
 Only if the inspect step found issues. At minimum, always fix language for Chinese books:
 
 ```bash
-uv run src/epub_cleanup.py -i epub/<Name>.epub -o epub/<Name>.epub --lang zh-CN
+.venv/bin/python src/epub_cleanup.py -i epub/<Name>.epub -o epub/<Name>.epub --lang zh-CN
 ```
 
 If `epub_check` showed ad keywords in content, add `--extra-keywords`:
 ```bash
-uv run src/epub_cleanup.py -i epub/<Name>.epub -o epub/<Name>.epub --lang zh-CN \
+.venv/bin/python src/epub_cleanup.py -i epub/<Name>.epub -o epub/<Name>.epub --lang zh-CN \
     --extra-keywords "额外广告词1,额外广告词2"
 ```
 
@@ -179,14 +184,14 @@ If the book is from a clean source, run with `--no-ad-removal --lang zh-CN`.
 Strip images/fonts/media. Slim to a temp path then copy back (the slimmer overwrites `-o`, but using a temp avoids losing the input if something fails):
 
 ```bash
-uv run src/epub_slimmer.py -i epub/<Name>.epub -o /tmp/slimmed.epub
+.venv/bin/python src/epub_slimmer.py -i epub/<Name>.epub -o /tmp/slimmed.epub
 cp /tmp/slimmed.epub epub/<Name>.epub
 ```
 
 ### Step 6 — Verify
 
 ```bash
-uv run src/epub_check.py epub/<Name>.epub
+.venv/bin/python src/epub_check.py epub/<Name>.epub
 ```
 
 Expected: **Clean.** (0 issues), 0 images, 0 fonts.
@@ -194,7 +199,7 @@ Expected: **Clean.** (0 issues), 0 images, 0 fonts.
 ### Step 7 — Build & push
 
 ```bash
-uv run src/epub2html.py -i ./epub -o ./public
+.venv/bin/python src/epub2html.py -i ./epub -o ./public
 git add epub/<Name>.epub && git commit -m "update" && git push
 ```
 
@@ -213,6 +218,7 @@ All `*.epub` files are Git LFS-tracked (`.gitattributes`). Run `git lfs pull` af
 
 - `public/` is gitignored (generated output)
 - `index.html` at repo root is legacy, not part of the pipeline
+- `README.md` is a brief intro that defers to this file for the full workflow; its Tools section lists the `src/` scripts, so update it when adding a new one
 - `.venv/` and `src/__pycache__/` are gitignored
-- Templates hardcode `lang="zh-CN"` — change these if adding non-Chinese books
+- UI text in templates/JS is English; Chinese strings in `src/` (ad keywords, `封面`/`书名页` detection) are functional, not UI — don't translate them
 - The filename stem of each EPUB becomes its output directory name, so get it right before committing

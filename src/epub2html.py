@@ -85,6 +85,15 @@ def convert_ebook(epub_path: Path, book_root: Path) -> str:
         for tag in soup.find_all():
             tag.attrs = {key: val for key, val in tag.attrs.items() if key in ['href', 'id']}
 
+        # remap internal chapter links (e.g. an in-content TOC) to the renamed files
+        for tag in soup.find_all('a', href=True):
+            url, frag = urldefrag(tag['href'])
+            if url.startswith(('http:', 'https:', '//', 'mailto:')):
+                continue
+            stem = os.path.basename(url)
+            if stem in filenames_map:
+                tag['href'] = f"{filenames_map[stem]}#{frag}" if frag else filenames_map[stem]
+
         body_content = soup.body.decode_contents() if soup.body else str(soup)
 
         idx = sorted_orig_names.index(orig_fname)

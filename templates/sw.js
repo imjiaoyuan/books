@@ -87,7 +87,8 @@ function offlineFallback() {
     '<!doctype html><meta charset="utf-8">' +
     '<meta name="viewport" content="width=device-width,initial-scale=1">' +
     '<body style="font:16px/1.6 sans-serif;padding:2em">' +
-    '本页尚未离线缓存。请联网后先打开一次，或在目录页点「离线下载整本」。</body>';
+    'This page is not cached for offline reading. Go online and open it ' +
+    'once first, or tap "Save Offline" on the contents page.</body>';
   return new Response(body, {
     status: 503,
     headers: { 'Content-Type': 'text/html; charset=utf-8' },
